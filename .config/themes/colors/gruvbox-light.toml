@@ -1,0 +1,40 @@
+# Gruvbox Light (Hard) theme
+name = "Gruvbox Light"
+appearance = "light"
+
+# Core colors
+foreground = "#3c3836"
+background = "#f9f5d7"
+cursor = "#3c3836"
+cursor_text = "#f9f5d7"
+selection_background = "#d5c4a1"
+selection_foreground = "#3c3836"
+accent = "#076678"
+
+# Normal colors (0-7)
+color0 = "#f9f5d7"
+color1 = "#cc241d"
+color2 = "#98971a"
+color3 = "#d79921"
+color4 = "#458588"
+color5 = "#b16286"
+color6 = "#689d6a"
+color7 = "#7c6f64"
+
+# Bright colors (8-15)
+color8 = "#928374"
+color9 = "#9d0006"
+color10 = "#79740e"
+color11 = "#b57614"
+color12 = "#076678"
+color13 = "#8f3f71"
+color14 = "#427b58"
+color15 = "#3c3836"
+
+# UI colors
+ui_border = "#a89984"
+ui_border_secondary = "#d5c4a1"
+ui_border_faint = "#ebdbb2"
+ui_selected = "#d5c4a1"
+ui_match = "#fabd2f"
+ui_gray = "#928374"
