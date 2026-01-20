@@ -1,0 +1,40 @@
+# Tokyo Night (Dark) theme
+name = "Tokyo Night"
+appearance = "dark"
+
+# Core colors
+foreground = "#c0caf5"
+background = "#1a1b26"
+cursor = "#c0caf5"
+cursor_text = "#1a1b26"
+selection_background = "#364A82"
+selection_foreground = "#c0caf5"
+accent = "#7aa2f7"
+
+# Normal colors (0-7)
+color0 = "#15161e"
+color1 = "#f7768e"
+color2 = "#9ece6a"
+color3 = "#e0af68"
+color4 = "#7aa2f7"
+color5 = "#bb9af7"
+color6 = "#7dcfff"
+color7 = "#a9b1d6"
+
+# Bright colors (8-15)
+color8 = "#414868"
+color9 = "#f7768e"
+color10 = "#9ece6a"
+color11 = "#e0af68"
+color12 = "#7aa2f7"
+color13 = "#bb9af7"
+color14 = "#7dcfff"
+color15 = "#c0caf5"
+
+# UI colors
+ui_border = "#3d59a1"
+ui_border_secondary = "#292e42"
+ui_border_faint = "#1f2335"
+ui_selected = "#364A82"
+ui_match = "#3d59a1"
+ui_gray = "#565f89"

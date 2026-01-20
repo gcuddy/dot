@@ -1,0 +1,20 @@
+# Alabaster Dark theme for gh-dash
+theme:
+  ui:
+    sectionsShowCount: true
+    table:
+      compact: false
+  colors:
+    text:
+      primary: "#CECECE"
+      secondary: "#777777"
+      inverted: "#0E1415"
+      faint: "#999999"
+      warning: "#e9bf57"
+      success: "#73ca50"
+    background:
+      selected: "#2a3a3d"
+    border:
+      primary: "#555555"
+      secondary: "#3a3a3a"
+      faint: "#2a2a2a"

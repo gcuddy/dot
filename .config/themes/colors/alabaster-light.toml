@@ -1,0 +1,40 @@
+# Alabaster Light theme
+name = "Alabaster Light"
+appearance = "light"
+
+# Core colors
+foreground = "#434343"
+background = "#F7F7F7"
+cursor = "#434343"
+cursor_text = "#F7F7F7"
+selection_background = "#D0D0D0"
+selection_foreground = "#434343"
+accent = "#325CC0"
+
+# Normal colors (0-7)
+color0 = "#000000"
+color1 = "#AA3731"
+color2 = "#448C27"
+color3 = "#CB9000"
+color4 = "#325CC0"
+color5 = "#7A3E9D"
+color6 = "#0083B2"
+color7 = "#BBBBBB"
+
+# Bright colors (8-15)
+color8 = "#777777"
+color9 = "#F05050"
+color10 = "#60CB00"
+color11 = "#FFBC5D"
+color12 = "#007ACC"
+color13 = "#E64CE6"
+color14 = "#00AACB"
+color15 = "#FFFFFF"
+
+# UI colors (for apps like tmux, lazygit, gh-dash)
+ui_border = "#AAAAAA"
+ui_border_secondary = "#CCCCCC"
+ui_border_faint = "#DDDDDD"
+ui_selected = "#D0D0D0"
+ui_match = "#FFBC5D"
+ui_gray = "#777777"

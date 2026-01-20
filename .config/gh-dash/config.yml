@@ -1,0 +1,89 @@
+prSections:
+  - title: Mine
+    filters: is:open author:@me
+    layout:
+      author:
+        hidden: true
+  - title: Review
+    filters: is:open review-requested:@me
+    type: null
+  - title: Involved
+    filters: is:open involves:@me -author:@me
+    type: null
+issuesSections:
+  - title: Creator
+    filters: is:open author:@me
+  - title: Assigned
+    filters: is:open assignee:@me
+  - title: Involved
+    filters: is:open involves:@me -author:@me
+repo:
+  branchesRefetchIntervalSeconds: 30
+  prsRefetchIntervalSeconds: 60
+pager:
+  diff: diffnav
+defaults:
+  view: repo
+  refetchIntervalMinutes: 10
+  layout:
+    prs:
+      repoName:
+        grow: true,
+        width: 10
+        hidden: false
+      base:
+        hidden: true
+  preview:
+    open: true
+    width: 70
+  prsLimit: 20
+  issuesLimit: 20
+repoPaths:
+  coverbasedev/irm: ~/Development/coverbase/irm
+keybindings:
+  universal:
+    - key: g
+      command: >
+        cd {{.RepoPath}} && lazygit
+
+  prs:
+    - key: O
+      builtin: checkout
+    - key: C
+      name: octo
+      command: >
+        tmux new-window -c {{.RepoPath}} ' nvim -c ":silent Octo pr edit {{.PrNumber}}" '
+
+    - key: b
+      name: storybook tests
+      command: cd {{.RepoPath}} && gh pr view {{.PrNumber}} --json statusCheckRollup | command jq -rcj '.statusCheckRollup.[] | select(.context == "UI Tests") | .targetUrl' | xargs open
+    - key: a
+      name: lazygit add
+      command: >
+        cd {{.RepoPath}} && git add -A && lazygit
+
+    - key: v
+      name: approve
+      command: >
+        gh pr review --repo {{.RepoName}} --approve --body "$(gum input --prompt='Approval Comment: ')" {{.PrNumber}}
+
+# Alabaster Dark theme for gh-dash
+theme:
+  ui:
+    sectionsShowCount: true
+    table:
+      compact: false
+  colors:
+    text:
+      primary: "#CECECE"
+      secondary: "#777777"
+      inverted: "#0E1415"
+      faint: "#999999"
+      warning: "#e9bf57"
+      success: "#73ca50"
+    background:
+      selected: "#2a3a3d"
+    border:
+      primary: "#555555"
+      secondary: "#3a3a3a"
+      faint: "#2a2a2a"

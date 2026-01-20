@@ -1,0 +1,11 @@
+{
+  "amp.commands.allowlist": ["cd", "pipenv", "pnpm"],
+  "amp.dangerouslyAllowAll": true,
+  "amp.mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest", "--headless", "--isolated"]
+    }
+  }
+}
+
