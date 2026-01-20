@@ -48,6 +48,8 @@ Applications/
 .config/fish.bak/
 
 # Machine-specific
+.config/tmux/theme-current.conf
+.config/lazygit/theme-current.yml
 .config/github-copilot/
 .config/configstore/
 .config/op/
