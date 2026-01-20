@@ -42,7 +42,7 @@ alias ls="eza --color=always --icons --group-directories-first"
 alias la='eza --color=always --icons --group-directories-first --all'
 alias ll='eza --color=always --icons --group-directories-first --all --long'
 alias c "open $1 -a \"Cursor\""
-alias config='/usr/bin/git --git-dir=/Users/gus/.dot/ --work-tree=/Users/gus'
+# config function is in functions/config.fish
 alias claude="/Users/gus/.claude/local/claude"
 
 # coverbase specific aliases
