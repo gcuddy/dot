@@ -1,0 +1,91 @@
+return {}
+-- return {
+--   {
+--     "ThePrimeagen/harpoon",
+--     branch = "harpoon2",
+--     keys = function()
+--       local keys = {
+--         {
+--           "<leader>ha",
+--           function()
+--             require("harpoon"):list():add()
+--           end,
+--           desc = "Harpoon Add File",
+--         },
+--         {
+--           "<leader>ho",
+--           function()
+--             local harpoon = require("harpoon")
+--             harpoon.ui:toggle_quick_menu(harpoon:list())
+--           end,
+--           desc = "Harpoon Open Quick Menu",
+--         },
+--         {
+--           "<leader>hr",
+--           function()
+--             local harpoon = require("harpoon")
+--             harpoon:list():remove()
+--           end,
+--           desc = "Harpoon Remove File",
+--         },
+--         {
+--           "<leader>hc",
+--           function()
+--             local harpoon = require("harpoon")
+--             harpoon:list():clear()
+--           end,
+--           desc = "Harpoon Clear All",
+--         },
+--       }
+--
+--       for i = 1, 5 do
+--         table.insert(keys, {
+--           "<leader>" .. i,
+--           function()
+--             require("harpoon"):list():select(i)
+--           end,
+--           desc = "Harpoon to File " .. i,
+--         })
+--       end
+--       return keys
+--     end,
+--   },
+--   {
+--     "nvim-lualine/lualine.nvim",
+--     opts = function(_, opts)
+--       local harpoon = require("harpoon")
+--       local list = harpoon:list()
+--       local Path = require("plenary.path")
+--
+--       local function harpoon_component()
+--         local total_marks = harpoon:list():length()
+--
+--         if total_marks == 0 then
+--           return ""
+--         end
+--
+--         local function normalize_path(buf_name, root)
+--           return Path:new(buf_name):make_relative(root)
+--         end
+--         local name = normalize_path(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), vim.loop.cwd())
+--
+--         local current_mark = "—"
+--
+--         local mark = list:get_by_value(name)
+--         if mark ~= nil then
+--           local indexes = {}
+--           for index, value in ipairs(list.items) do
+--             indexes[value.value] = index
+--           end
+--           local i = indexes[name]
+--           if i then
+--             current_mark = tostring(indexes[name])
+--           end
+--         end
+--
+--         return string.format("󱡅 %s/%d", current_mark, total_marks)
+--       end
+--       table.insert(opts.sections.lualine_b, harpoon_component)
+--     end,
+--   },
+-- }

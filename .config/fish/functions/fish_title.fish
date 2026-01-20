@@ -1,0 +1,32 @@
+# emoji: https://emojicombos.com/
+function fish_title
+    # emacs is basically the only term that can't handle it.
+    set -l cmd (status current-command)
+    switch $cmd
+        case fish
+            set cmd "🐟 "
+        case nvim vim
+            set cmd "📝 "
+        case gh
+            set cmd "🐙 "
+        case git lazygit lg
+            set cmd "🌿 "
+        case topgrade
+            set cmd "🔄 "
+        case htop btop
+            set cmd "📊 "
+        case curl wget
+            set cmd "🌐 "
+        case cargo pnpm
+            set cmd "📦 "
+        case docker docker-compose lazydocker ld
+            set cmd "🐳 "
+        case make
+            set cmd "🛠️ "
+        case node
+            set cmd "🌲 "
+        case pacman paru
+            set cmd "📦 "
+    end
+    echo "$cmd   $(prompt_pwd)"
+end

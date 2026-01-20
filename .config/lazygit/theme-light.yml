@@ -1,0 +1,28 @@
+# Alabaster Light theme for lazygit
+gui:
+  theme:
+    activeBorderColor:
+      - "#325CC0"
+      - bold
+    inactiveViewSelectedLineBgColor:
+      - "#E8E8E8"
+    inactiveBorderColor:
+      - "#BBBBBB"
+    optionsTextColor:
+      - "#325CC0"
+    selectedLineBgColor:
+      - "#D0D0D0"
+    selectedRangeBgColor:
+      - "#D0D0D0"
+    cherryPickedCommitBgColor:
+      - "#B0C4DE"
+    cherryPickedCommitFgColor:
+      - "#000000"
+    unstagedChangesColor:
+      - "#AA3731"
+    defaultFgColor:
+      - "#434343"
+git:
+  paging:
+    colorArg: always
+    pager: delta --light --paging=never

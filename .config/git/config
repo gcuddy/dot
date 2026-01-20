@@ -1,0 +1,95 @@
+[user]
+	name = Gus Cuddy
+	email = gus@coverbase.ai
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[core]
+	excludesfile = ~/.gitignore
+	editor = nvim
+	ignorecase = false
+
+[rerere]
+  enabled = true
+
+[color]
+  status = auto
+  diff = auto
+  branch = auto
+  interactive = auto
+  grep = auto
+  ui = auto
+[pager]
+  log = delta
+  reflog = delta
+  show = delta
+  difftool = true
+  branch = 
+	diff = diffnav
+[interactive]
+    diffFilter = delta --color-only
+
+[include]
+	path = ~/delta-themes/catppuccin.gitconfig
+
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  light = true      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+  side-by-side = false
+  line-numbers = true
+	; features = catppuccin-macchiato
+[alias]
+  a = "!git status --short | peco | awk '{print $2}' | xargs git add"
+  d = diff
+  co = checkout
+  c = commit --short
+  ci = commit --short
+  ps = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
+  pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
+  st = status
+  br = branch
+  ba = branch -a
+  bm = branch --merged
+  bn = branch --no-merged
+  df = "!git hist | peco | awk '{print $2}' | xargs -I {} git diff {}^ {}"
+  p = push
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate --date=short --color --decorate
+  hist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all
+  llog = log --graph --name-status --pretty=format:\"%C(red)%h %C(reset)(%cd) %C(green)%an %Creset%s %C(yellow)%d%Creset\" --date=relative
+  open = "!hub browse"
+  type = cat-file -t
+  dump = cat-file -p
+  find = "!f() { git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative -S'pretty' -S\"$@\" | peco | awk '{print $1}' | xargs -I {} git diff {}^ {}; }; f"
+  # edit conflicted file on merge
+  edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+  # add conflicted file on merge
+  add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+  # log commits between two commit hashes
+  logb = "!f() { git log --pretty=format:\"%h %an: %s\" $1...$2; }; f"
+[merge]
+    conflictstyle = diff3
+[diff]
+  tool = nvimdiff
+  colorMoved = default
+[rebase]
+	updateRefs = true
+[difftool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[fetch]
+	prune = true
+[hub]
+	protocol = https
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[push]
+	useForceIfIncludes = true

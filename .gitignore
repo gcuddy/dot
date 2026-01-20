@@ -1,0 +1,65 @@
+# Dotfiles repo itself (don't track the tracker)
+.dot/
+
+# Secrets - NEVER commit these
+.env
+.pgpass
+.netrc
+
+# History files
+.bash_history
+.zsh_history
+.python_history
+.psql_history
+.tig_history
+.lesshst
+.viminfo
+
+# Caches and state
+.cache/
+.local/
+.npm/
+.bun/
+.cargo/
+.rustup/
+.docker/
+.lima/
+.orbstack/
+.node_modules/
+
+# App data (large, machine-specific)
+.Trash/
+Library/
+Desktop/
+Documents/
+Downloads/
+Movies/
+Music/
+Pictures/
+Applications/
+
+# Claude artifacts
+.claude/
+.claude.json
+.claude.json.corrupted.*
+
+# Backup directories
+.config/nvim.bak*/
+.config/fish.bak/
+
+# Machine-specific
+.config/github-copilot/
+.config/configstore/
+.config/op/
+.config/gcloud/
+.config/netlify/
+.config/Slack/
+.config/Cursor/
+.config/Claude/
+
+# Misc
+.DS_Store
+*.log
+*.swp
+*.swo
+*~

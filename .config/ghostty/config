@@ -1,0 +1,137 @@
+auto-update-channel = tip
+window-decoration = true
+window-theme = "dark"
+window-save-state = always
+
+window-padding-balance = true
+# makes it maximizes the window
+window-height = 9999
+window-width = 9999
+confirm-close-surface = true
+macos-option-as-alt = true
+macos-titlebar-style = "hidden"
+shell-integration = none
+cursor-style = block
+cursor-style-blink = true
+mouse-hide-while-typing = true
+# theme = vesper-dark
+# theme = "Gruvbox Dark Hard"
+# theme = tokyonight
+# theme = Catppuccin Macchiato
+# theme = Kanagawa Wave
+theme = light:alabaster,dark:alabaster_dark
+clipboard-read = "allow"
+clipboard-paste-protection = false
+
+# makes it darker like it was before https://github.com/mbadolato/iTerm2-Color-Schemes/commit/506ab2b98b6546d1dc46327dfa1e1e3f8363fbc0
+# palette = "0=#1b1b1b"
+# background = "#1b1b1b"
+#
+background-opacity = 0.97
+background-blur = true
+
+font-family = "JetBrainsMono Nerd Font Mono"
+# font-family = "CommitMono Nerd Font"
+font-size = 19
+font-feature = zero
+font-feature = -calt
+
+#  _                        
+# | |_ _ __ ___  _   ___  __
+# | __| '_ ` _ \| | | \ \/ /
+# | |_| | | | | | |_| |>  < 
+#  \__|_| |_| |_|\__,_/_/\_\
+# --------------------------
+# NOTE: \x01 is ctrl+a which is the tmux prefix
+# ---------------------------------------------
+# close tab
+keybind = cmd+w=text:\x01x
+# new tab
+keybind = cmd+t=text:\x01c
+# search in pane - ctrl+a + ctrl+f
+keybind = cmd+f=text:\x01\x06
+# search in pane - tmux-fingers
+keybind = cmd+shift+f=text:\x01F
+# clear
+keybind = cmd+l=text:\x01\x0c
+# hard clear
+keybind = cmd+ctrl+l=text:\x01\x1b\x0c
+# sesh
+keybind = cmd+k=text:\x01T
+# mprocs
+keybind = cmd+shift+m=text:\x01M
+# last session
+keybind = cmd+'=text:\x01\'
+# last window
+keybind = cmd+;=text:\x01;
+# split vertical
+keybind = cmd+e=text:\x01|
+# split horizontal
+keybind = cmd+shift+e=text:\x01-
+# tmux window #
+keybind = cmd+physical:one=text:\x01\x31
+keybind = cmd+physical:two=text:\x01\x32
+keybind = cmd+physical:three=text:\x01\x33
+keybind = cmd+physical:four=text:\x01\x34
+keybind = cmd+physical:five=text:\x01\x35
+keybind = cmd+physical:six=text:\x01\x36
+keybind = cmd+physical:seven=text:\x01\x37
+keybind = cmd+physical:eight=text:\x01\x38
+keybind = cmd+physical:nine=text:\x01\x39
+# gh-dash in new tab
+keybind = cmd+g=text:\x01g
+# gh-dash in its own session
+keybind = cmd+shift+g=text:\x01G
+# go to mono session
+keybind = cmd+option+m=text:\x01m
+# harpoon - quick session switching
+keybind = cmd+option+h=text:\x01H
+keybind = cmd+option+physical:one=text:\x01\x1b1
+keybind = cmd+option+physical:two=text:\x01\x1b2
+keybind = cmd+option+physical:three=text:\x01\x1b3
+keybind = cmd+option+physical:four=text:\x01\x1b4
+keybind = cmd+option+physical:five=text:\x01\x1b5
+# keyb - doesn't work
+keybind = cmd+?=text:\x01?
+# open link
+keybind = cmd+o=text:\x01u
+# enter copy mode
+keybind = cmd+u=text:\x01[
+# update plugins
+keybind = cmd+shift+u=text:\x01U
+# toggle zoom
+keybind = cmd+z=text:\x01z
+# last command output
+keybind = cmd+shift+c=text:\x01C
+# move window right
+keybind = cmd+shift+comma=text:\x01<
+# move window left
+keybind = cmd+shift+period=text:\x01>
+# command mode
+keybind = cmd+shift+;=text:\x01:
+# open dotfiles session in nvim
+keybind = cmd+comma=text:\x01\x2c
+# show pane info
+keybind = cmd+i=text:\x01i
+
+#  _ ____   _(_)_ __ ___  
+# | '_ \ \ / / | '_ ` _ \ 
+# | | | \ V /| | | | | | |
+# |_| |_|\_/ |_|_| |_| |_|
+# ------------------------
+# quit
+keybind = cmd+q=text:\x1bZQ
+# save
+keybind = cmd+s=text:\x1b bw
+# save all
+keybind = cmd+shift+s=text:\x1b bW
+# select all
+keybind = cmd+a=text:\x1bggVG
+# open file
+keybind = cmd+p=text:\x10
+# command palette
+keybind = cmd+shift+p=text:\x1b fc
+
+keybind = ctrl+shift+p=unbind
+
+# vim: ft=conf
