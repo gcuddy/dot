@@ -1,0 +1,28 @@
+# Gruvbox Dark theme for lazygit
+gui:
+  theme:
+    activeBorderColor:
+      - "#83a598"
+      - bold
+    inactiveViewSelectedLineBgColor:
+      - "#504945"
+    inactiveBorderColor:
+      - "#928374"
+    optionsTextColor:
+      - "#83a598"
+    selectedLineBgColor:
+      - "#504945"
+    selectedRangeBgColor:
+      - "#504945"
+    cherryPickedCommitBgColor:
+      - "#fabd2f"
+    cherryPickedCommitFgColor:
+      - "#ebdbb2"
+    unstagedChangesColor:
+      - "#cc241d"
+    defaultFgColor:
+      - "#ebdbb2"
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never

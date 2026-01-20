@@ -4,6 +4,12 @@
 function config
     if test "$argv[1]" = "lg"
         lazygit --git-dir=$HOME/.dot --work-tree=$HOME
+    else if test "$argv[1]" = "add-new"
+        # Add all new files in tracked directories
+        for f in (config new)
+            command git --git-dir=$HOME/.dot --work-tree=$HOME add $f
+            echo "Added $f"
+        end
     else if test "$argv[1]" = "new"
         # Show new (untracked) files in tracked directories
         # Usage: config new [directory]  (e.g., config new themes)
