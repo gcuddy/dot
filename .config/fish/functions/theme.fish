@@ -122,6 +122,8 @@ function theme --description "Switch themes (usage: theme [name] [light|dark])"
             set nvim_colorscheme "kanagawa"
         case "alabaster"
             set nvim_colorscheme "alabaster"
+        case "gruvbox"
+            set nvim_colorscheme "gruvbox"
     end
 
     for addr in (find /tmp -name 'nvim.*' -type s 2>/dev/null)

@@ -3,40 +3,75 @@
 # Argument: "dark" or "light"
 
 MODE="$1"
+THEMES_DIR="$HOME/.config/themes"
+CURRENT_DIR="$THEMES_DIR/current"
+COLORS_DIR="$THEMES_DIR/colors"
 
-# Update tmux theme
-if [ -e "$HOME/.config/tmux/theme-$MODE.conf" ]; then
-    ln -sf "$HOME/.config/tmux/theme-$MODE.conf" "$HOME/.config/tmux/theme-current.conf"
-    # Reload all tmux sessions
-    if command -v tmux &>/dev/null && tmux list-sessions &>/dev/null; then
+# Get current theme base name
+THEME_BASE="alabaster"
+if [[ -f "$CURRENT_DIR/theme.base" ]]; then
+    THEME_BASE=$(cat "$CURRENT_DIR/theme.base")
+fi
+
+# Find colors file
+COLORS_FILE=""
+if [[ -f "$COLORS_DIR/${THEME_BASE}-${MODE}.toml" ]]; then
+    COLORS_FILE="$COLORS_DIR/${THEME_BASE}-${MODE}.toml"
+elif [[ -f "$COLORS_DIR/${THEME_BASE}.toml" ]]; then
+    COLORS_FILE="$COLORS_DIR/${THEME_BASE}.toml"
+fi
+
+if [[ -z "$COLORS_FILE" ]]; then
+    echo "No colors file found for $THEME_BASE $MODE"
+    exit 1
+fi
+
+# Generate configs from templates
+"$THEMES_DIR/apply-theme.sh" "$COLORS_FILE"
+
+# Apply to apps
+
+# Ghostty - install theme
+if [[ -f "$CURRENT_DIR/ghostty" ]]; then
+    cp "$CURRENT_DIR/ghostty" "$HOME/.config/ghostty/themes/${THEME_BASE}-${MODE}"
+fi
+
+# Tmux - copy and reload
+if [[ -f "$CURRENT_DIR/tmux.conf" ]]; then
+    cp "$CURRENT_DIR/tmux.conf" "$HOME/.config/tmux/theme-current.conf"
+    if pgrep -x tmux >/dev/null; then
         tmux source-file "$HOME/.config/tmux/tmux.conf" 2>/dev/null
     fi
 fi
 
-# Update Claude Code theme
+# Lazygit - copy theme
+if [[ -f "$CURRENT_DIR/lazygit.yml" ]]; then
+    cp "$CURRENT_DIR/lazygit.yml" "$HOME/.config/lazygit/theme-current.yml"
+fi
+
+# gh-dash - merge configs
+if [[ -f "$CURRENT_DIR/gh-dash.yml" ]] && [[ -f "$HOME/.config/gh-dash/config-base.yml" ]]; then
+    yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
+        "$HOME/.config/gh-dash/config-base.yml" "$CURRENT_DIR/gh-dash.yml" \
+        > "$HOME/.config/gh-dash/config.yml"
+fi
+
+# Claude Code
 if command -v claude &>/dev/null; then
     claude config set --global theme "$MODE" 2>/dev/null
 fi
 
-# Update nvim instances (auto-dark-mode plugin will also detect this)
+# Neovim - update running instances
+NVIM_COLORSCHEME="$THEME_BASE"
+case "$THEME_BASE" in
+    "tokyo-night") NVIM_COLORSCHEME="tokyonight" ;;
+    "kanagawa") NVIM_COLORSCHEME="kanagawa" ;;
+    "alabaster") NVIM_COLORSCHEME="alabaster" ;;
+    "gruvbox") NVIM_COLORSCHEME="gruvbox" ;;
+esac
+
 for addr in /tmp/nvim.*/0; do
-    if [ -S "$addr" ]; then
-        if [ "$MODE" = "light" ]; then
-            nvim --server "$addr" --remote-send '<Cmd>set background=light<CR><Cmd>colorscheme alabaster<CR>' 2>/dev/null
-        else
-            nvim --server "$addr" --remote-send '<Cmd>set background=dark<CR><Cmd>colorscheme alabaster<CR>' 2>/dev/null
-        fi
+    if [[ -S "$addr" ]]; then
+        nvim --server "$addr" --remote-send "<Cmd>set background=$MODE<CR><Cmd>colorscheme $NVIM_COLORSCHEME<CR>" 2>/dev/null
     fi
 done
-
-# Update lazygit theme (will apply on next launch)
-if [ -e "$HOME/.config/lazygit/theme-$MODE.yml" ]; then
-    ln -sf "$HOME/.config/lazygit/theme-$MODE.yml" "$HOME/.config/lazygit/theme-current.yml"
-fi
-
-# Update gh-dash theme (merge base + theme)
-if [ -e "$HOME/.config/gh-dash/config-base.yml" ] && [ -e "$HOME/.config/gh-dash/theme-$MODE.yml" ]; then
-    yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
-        "$HOME/.config/gh-dash/config-base.yml" "$HOME/.config/gh-dash/theme-$MODE.yml" \
-        > "$HOME/.config/gh-dash/config.yml"
-fi

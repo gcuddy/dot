@@ -1,27 +1,27 @@
-# Alabaster Dark theme for lazygit
+# Gruvbox Dark theme for lazygit
 gui:
   theme:
     activeBorderColor:
-      - "#4a88e4"
+      - "#83a598"
       - bold
     inactiveViewSelectedLineBgColor:
-      - "#2a3a3d"
+      - "#504945"
     inactiveBorderColor:
-      - "#777777"
+      - "#928374"
     optionsTextColor:
-      - "#4a88e4"
+      - "#83a598"
     selectedLineBgColor:
-      - "#2a3a3d"
+      - "#504945"
     selectedRangeBgColor:
-      - "#2a3a3d"
+      - "#504945"
     cherryPickedCommitBgColor:
-      - "#3d5a5f"
+      - "#fabd2f"
     cherryPickedCommitFgColor:
-      - "#CECECE"
+      - "#ebdbb2"
     unstagedChangesColor:
-      - "#e25d56"
+      - "#cc241d"
     defaultFgColor:
-      - "#CECECE"
+      - "#ebdbb2"
 git:
   paging:
     colorArg: always

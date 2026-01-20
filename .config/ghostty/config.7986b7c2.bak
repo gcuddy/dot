@@ -1,0 +1,48 @@
+# Ghostty theme
+theme = catppuccin-macchiato
+cursor-invert-fg-bg = true
+background-opacity = 0.9
+background-blur = true
+window-theme = ghostty
+
+
+# Shell integrations
+shell-integration = fish
+quit-after-last-window-closed = true
+
+# Font family
+font-family = JetBrainsMono Nerd Font Mono
+adjust-underline-position = 4
+
+
+# Font size
+font-size = 16
+
+# cursor-color = #F76EC9
+# adjust-cursor-thickness = 5
+
+# Opacity of split windows
+unfocused-split-opacity = 0.97  
+
+# Cursor style
+# cursor-style-blink = true
+
+# Clipboard settings
+clipboard-read = allow
+clipboard-write = allow
+
+# macos options
+macos-option-as-alt = true
+macos-titlebar-proxy-icon = hidden
+
+
+# Window settings
+window-width = 90
+window-height = 30
+window-colorspace = display-p3
+window-padding-color = background
+window-padding-balance = true
+window-padding-x = 0
+window-padding-y = 0
+
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
