@@ -1,66 +1,18 @@
 return {
-  {
-    "catppuccin/nvim",
-    opts = {
-      flavour = "macchiato",
-    },
-  },
-  {
-    "kvrohit/rasmus.nvim",
-  },
-  {
-    "p00f/alabaster.nvim",
-  },
-  {
-    "olivercederborg/poimandres.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("poimandres").setup({
-        -- leave this setup function empty for default config
-        -- or refer to the configuration section
-        -- for configuration options
-      })
-    end,
-  },
-  {
-    "rebelot/kanagawa.nvim",
-  },
-  {
-    "yorickpeterse/vim-paper",
-    name = "vim-paper",
-    lazy = true,
-    dev = { true },
-  },
-  {
-    "projekt0n/github-nvim-theme",
-    name = "github-theme",
-  },
-  {
-    "datsfilipe/vesper.nvim",
-    opts = {
-      transparent = true, -- Boolean: Sets the background to transparent
-      -- italics = {
-      --   comments = false, -- Boolean: Italicizes comments
-      --   keywords = false, -- Boolean: Italicizes keywords
-      --   functions = false, -- Boolean: Italicizes functions
-      --   strings = false, -- Boolean: Italicizes strings
-      --   variables = false, -- Boolean: Italicizes variables
-      -- },
-    },
-  },
-  {
-    "vinitkumar/oscura-vim",
-  },
-  {
-    "samharju/synthweave.nvim",
-  },
+  { "catppuccin/nvim", lazy = true, opts = { flavour = "macchiato" } },
+  { "kvrohit/rasmus.nvim", lazy = true },
+  { "p00f/alabaster.nvim" },
+  { "olivercederborg/poimandres.nvim", lazy = true },
+  { "rebelot/kanagawa.nvim", lazy = true },
+  { "yorickpeterse/vim-paper", name = "vim-paper", lazy = true, dev = { true } },
+  { "projekt0n/github-nvim-theme", name = "github-theme", lazy = true },
+  { "datsfilipe/vesper.nvim", lazy = true, opts = { transparent = true } },
+  { "vinitkumar/oscura-vim", lazy = true },
+  { "samharju/synthweave.nvim", lazy = true },
   {
     "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     opts = {
-      -- style = "storm",
       transparent = true,
       terminal_colors = true,
       styles = {
@@ -77,8 +29,7 @@ return {
   },
   {
     "ellisonleao/gruvbox.nvim",
-    priority = 1000,
-    config = true,
+    lazy = true,
     opts = {
       contrast = "hard",
       transparent_mode = true,
@@ -86,27 +37,22 @@ return {
   },
   {
     "f-person/auto-dark-mode.nvim",
-    config = function()
-      require("auto-dark-mode").setup({
-        update_interval = 1000,
-        set_dark_mode = function()
-          vim.o.background = "dark"
-          vim.cmd("colorscheme alabaster")
-        end,
-        set_light_mode = function()
-          vim.o.background = "light"
-          vim.cmd("colorscheme alabaster")
-        end,
-      })
-    end,
+    opts = {
+      update_interval = 5000,
+      set_dark_mode = function()
+        vim.o.background = "dark"
+        vim.cmd("colorscheme alabaster")
+      end,
+      set_light_mode = function()
+        vim.o.background = "light"
+        vim.cmd("colorscheme alabaster")
+      end,
+    },
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      -- colorscheme = vim.fn.getenv("ITERM_PROFILE") == "Light" and "ayu" or "tokyonight-moon",
-      -- colorscheme = "tokyonight",
       colorscheme = "alabaster",
-      -- colorscheme = "vesper",
     },
   },
 }

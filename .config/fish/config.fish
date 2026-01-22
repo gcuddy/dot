@@ -43,7 +43,6 @@ alias la='eza --color=always --icons --group-directories-first --all'
 alias ll='eza --color=always --icons --group-directories-first --all --long'
 alias c "open $1 -a \"Cursor\""
 # config function is in functions/config.fish
-alias claude="/Users/gus/.claude/local/claude"
 
 # coverbase specific aliases
 alias test:api "docker exec dev-api.irm.cb.local pytest"

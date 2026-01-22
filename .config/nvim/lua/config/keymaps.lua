@@ -1,20 +1,4 @@
-local util = require("util")
-
-util.cowboy()
-
 local map = vim.keymap.set
-
-vim.keymap.set("n", "<leader>ub", function()
-  if vim.o.background == "dark" then
-    print("Switching to light mode: Github Light")
-    vim.cmd("set background=light")
-    vim.cmd("colorscheme github_light")
-  else
-    print("Switching to dark mode: Catppuccin Macchiato")
-    vim.cmd("set background=dark")
-    vim.cmd("colorscheme catppuccin-macchiato")
-  end
-end, { desc = "Toggle light dark mode" })
 
 -- Center buffer while navigating
 vim.keymap.set("n", "J", "mzJ`z")

@@ -34,11 +34,8 @@ function theme --description "Switch themes (usage: theme [name] [light|dark])"
 
     # If no theme name, try to get current theme base name
     if test -z "$theme_name"
-        if test -f $current_dir/colors.toml
-            # Extract theme base name (e.g., "alabaster" from "alabaster-dark")
-            set -l current (cat $current_dir/theme.name 2>/dev/null | string trim)
-            # Try to get base name by removing -light or -dark suffix
-            set theme_name (echo $current | sed -E 's/-(light|dark)$//; s/ (Light|Dark)$//' | string lower | string replace -a ' ' '-')
+        if test -f $current_dir/theme.base
+            set theme_name (cat $current_dir/theme.base 2>/dev/null | string trim)
         end
         if test -z "$theme_name"
             set theme_name "alabaster"
