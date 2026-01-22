@@ -1,7 +1,6 @@
 function slay
-    # Get list of high CPU usage processes (pid, cpu%, command)
-    top -b -n1 | awk 'NR>7 {if($9 > 90) print $1, $9, $12}' | while read pid cpu command
-        echo "Killing PID $pid ($command) for high CPU usage: $cpu%"
+    ps -Ao pid,%cpu,comm | awk '$2 > 90 {print $1, $2, $3}' | while read pid cpu command
+        echo "Killing PID $pid ($command) - CPU: $cpu%"
         kill -9 $pid
     end
 end

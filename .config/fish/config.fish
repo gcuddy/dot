@@ -1,5 +1,6 @@
 set -gx TERM xterm-256color
 set -gx EDITOR nvim
+set -gx MANPAGER "nvim +Man!"
 set -gx PROJECTS /Users/gus/Development
 
 set -gx fish_vi_force_cursor 1

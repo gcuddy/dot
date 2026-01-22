@@ -18,7 +18,7 @@ function git_search
     end
 
     echo "Searching staged changes..."
-    for file in (git diff --name-only)
+    for file in (git diff --cached --name-only)
         set -l file_content (git show :$file)
         if echo "$file_content" | rg -q "$search_term"
             echo "In file: $file"
