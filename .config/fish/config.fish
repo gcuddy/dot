@@ -8,23 +8,12 @@ set -gx fish_cursor_insert line blink
 set -gx fish_cursor_visual block
 set -gx fish_cursor_replace_one underscore
 
-# PATH - consolidated
-set -gx PATH ~/bin ~/.local/bin bin $PATH
+# PATH - consolidated (fish_add_path deduplicates automatically)
 set -gx PNPM_HOME /Users/gus/Library/pnpm
 set -gx BUN_INSTALL "$HOME/.bun"
-if not string match -q -- $PNPM_HOME $PATH
-    set -gx PATH "$PNPM_HOME" $BUN_INSTALL/bin $PATH
-end
+fish_add_path -g ~/bin ~/.local/bin bin $PNPM_HOME $BUN_INSTALL/bin
 
-# asdf (handles its own paths)
-source ~/.asdf/asdf.fish
-
-# Lazy-load pyenv (saves ~85ms on startup)
-function pyenv
-    functions -e pyenv
-    pyenv init - fish | source
-    pyenv $argv
-end
+# Python managed by uv (reads .python-version files automatically)
 
 # Exports
 set -x HOMEBREW_NO_AUTO_UPDATE 1
@@ -51,41 +40,23 @@ alias test:common "docker exec dev-common-test pytest"
 alias alembic:run "docker exec dev-api.irm.cb.local alembic -c /irm/common/alembic.ini"
 alias tasker:python "docker exec -it dev-tasker.irm.cb.local python"
 
-# Abbreviations
-abbr g hub
-abbr git hub
-abbr ghc "gh co"
-abbr gg lazygit
-abbr gl 'hub l --color | devmoji --log --color | less -rXF'
-abbr gs "hub st"
-abbr gb "hub checkout -b"
-abbr gc "hub commit"
-abbr gpr "hub pr checkout"
-abbr gm "hub branch -l main | rg main > /dev/null 2>&1 && hub checkout main || hub checkout master"
-abbr gcm "hub checkout main --"
-abbr gcp "hub commit -p"
-abbr gpp "hub push"
-abbr gp "hub pull"
-abbr glc "gh run list --workflow=pulumi-up.yml --limit=1 --json headSha --jq '.[0].headSha'"
-abbr s "source $HOME/.config/fish/config.fish"
-abbr mv "mv -iv"
-abbr cp "cp -riv"
-abbr mkdir "mkdir -vp"
-abbr l ll
-abbr ncdu "ncdu --color dark"
-abbr vi nvim
-abbr v nvim
-abbr t tmux
-abbr ta 'tmux attach -t'
-abbr tad 'tmux attach -d -t'
-abbr ts 'tmux new -s'
-abbr tl 'tmux ls'
-abbr tk 'tmux kill-session -t'
+# Abbreviations are universal - run `_setup_abbreviations` once if missing
 
-# Interactive shell setup
+# Interactive shell setup - cached for speed (delete *.cached.fish to regenerate)
 if status is-interactive
-    atuin init fish --disable-up-arrow | source
-    zoxide init fish | source
+    set -l cache_dir ~/.config/fish/conf.d
+    if not test -f $cache_dir/atuin.cached.fish
+        atuin init fish --disable-up-arrow > $cache_dir/atuin.cached.fish
+    end
+    if not test -f $cache_dir/zoxide.cached.fish
+        zoxide init fish > $cache_dir/zoxide.cached.fish
+    end
+    if not test -f $cache_dir/mise.cached.fish
+        mise activate fish > $cache_dir/mise.cached.fish
+    end
+    source $cache_dir/atuin.cached.fish
+    source $cache_dir/zoxide.cached.fish
+    source $cache_dir/mise.cached.fish
 end
 
 # OrbStack (only if installed)
