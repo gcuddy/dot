@@ -8,6 +8,7 @@
 - **Abstractions**: Consciously constrained, pragmatically parameterised, doggedly documented
 
 ### **ENTROPY REMINDER**
+
 This codebase will outlive you. Every shortcut you take becomes
 someone else's burden. Every hack compounds into technical debt
 that slows the whole team down.
@@ -18,15 +19,13 @@ you cut will be cut again.
 
 **Fight entropy. Leave the codebase better than you found it.**
 
-
 ## Testing
 
 - Write tests that verify semantically correct behavior
 - **Failing tests are acceptable** when they expose genuine bugs and test correct behavior
 
-## Git, jj, VCS, SCM, Pull Requests, Commits
+## Git, VCS, SCM, Pull Requests, Commits
 
-- **ALWAYS check for `.jj/` dir before ANY VCS command** - if present, use jj not git
 - **Never** add Claude to attribution or as a contributor PRs, commits, messages, or PR descriptions
 - **gh CLI available** for GitHub operations (PRs, issues, etc.)
 
@@ -37,7 +36,9 @@ you cut will be cut again.
 ## Specialized Subagents
 
 ### Oracle
+
 Invoke for: code review, architecture decisions, debugging analysis, refactor planning, second opinion.
 
 ### Librarian
+
 Invoke for: understanding 3rd party libraries/packages, exploring remote repositories, discovering open source patterns.
