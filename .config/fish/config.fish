@@ -41,7 +41,41 @@ alias test:common "docker exec dev-common-test pytest"
 alias alembic:run "docker exec dev-api.irm.cb.local alembic -c /irm/common/alembic.ini"
 alias tasker:python "docker exec -it dev-tasker.irm.cb.local python"
 
-# Abbreviations are universal - run `_setup_abbreviations` once if missing
+# Abbreviations
+abbr -a g hub
+abbr -a git hub
+abbr -a ghc 'gh co'
+abbr -a gg lazygit
+abbr -a gl 'hub l --color | devmoji --log --color | less -rXF'
+abbr -a gs 'hub st'
+abbr -a gb 'hub checkout -b'
+abbr -a gc 'hub commit'
+abbr -a gpr 'hub pr checkout'
+abbr -a gm 'hub branch -l main | rg main > /dev/null 2>&1 && hub checkout main || hub checkout master'
+abbr -a gcm 'hub checkout main --'
+abbr -a gcp 'hub commit -p'
+abbr -a gpp 'hub push'
+abbr -a gp 'hub pull'
+abbr -a glc 'gh run list --workflow=pulumi-up.yml --limit=1 --json headSha --jq .[0].headSha'
+abbr -a s 'source ~/.config/fish/config.fish'
+abbr -a mv 'mv -iv'
+abbr -a cp 'cp -riv'
+abbr -a mkdir 'mkdir -vp'
+abbr -a l ll
+abbr -a ncdu 'ncdu --color dark'
+abbr -a vi nvim
+abbr -a v nvim
+abbr -a t tmux
+abbr -a ta 'tmux attach -t'
+abbr -a tad 'tmux attach -d -t'
+abbr -a ts 'tmux new -s'
+abbr -a tl 'tmux ls'
+abbr -a tk 'tmux kill-session -t'
+abbr -a dc 'docker compose'
+abbr -a dcu 'docker compose up -d'
+abbr -a dcd 'docker compose down'
+abbr -a dps 'docker ps'
+abbr -a dlogs 'docker logs -f'
 
 # Interactive shell setup - cached for speed (delete *.cached.fish to regenerate)
 if status is-interactive
