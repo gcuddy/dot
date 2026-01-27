@@ -1,5 +1,5 @@
 return {
-  { "catppuccin/nvim", lazy = true, opts = { flavour = "macchiato" } },
+  { "catppuccin/nvim", lazy = true, opts = { flavour = "macchiato", transparent_background = true } },
   { "kvrohit/rasmus.nvim", lazy = true },
   { "p00f/alabaster.nvim" },
   { "olivercederborg/poimandres.nvim", lazy = true },
@@ -41,18 +41,18 @@ return {
       update_interval = 5000,
       set_dark_mode = function()
         vim.o.background = "dark"
-        vim.cmd("colorscheme alabaster")
+        vim.cmd("colorscheme catppuccin")
       end,
       set_light_mode = function()
         vim.o.background = "light"
-        vim.cmd("colorscheme alabaster")
+        vim.cmd("colorscheme catppuccin")
       end,
     },
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "alabaster",
+      colorscheme = "catppuccin",
     },
   },
 }

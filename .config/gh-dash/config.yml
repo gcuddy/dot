@@ -67,7 +67,7 @@ keybindings:
       command: >
         gh pr review --repo {{.RepoName}} --approve --body "$(gum input --prompt='Approval Comment: ')" {{.PrNumber}}
 
-# Gruvbox Dark theme for gh-dash
+# Catppuccin Macchiato theme for gh-dash
 theme:
   ui:
     sectionsShowCount: true
@@ -75,15 +75,15 @@ theme:
       compact: false
   colors:
     text:
-      primary: "#ebdbb2"
-      secondary: "#928374"
-      inverted: "#1d2021"
-      faint: "#928374"
-      warning: "#d79921"
-      success: "#98971a"
+      primary: "#cad3f5"
+      secondary: "#6e738d"
+      inverted: "#24273a"
+      faint: "#5b6078"
+      warning: "#eed49f"
+      success: "#a6da95"
     background:
-      selected: "#504945"
+      selected: "#5b6078"
     border:
-      primary: "#504945"
-      secondary: "#3c3836"
-      faint: "#282828"
+      primary: "#8aadf4"
+      secondary: "#494d64"
+      faint: "#363a4f"

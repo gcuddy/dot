@@ -68,6 +68,7 @@ case "$THEME_BASE" in
     "kanagawa") NVIM_COLORSCHEME="kanagawa" ;;
     "alabaster") NVIM_COLORSCHEME="alabaster" ;;
     "gruvbox") NVIM_COLORSCHEME="gruvbox" ;;
+    "catppuccin-macchiato") NVIM_COLORSCHEME="catppuccin-macchiato" ;;
 esac
 
 for addr in /tmp/nvim.*/0; do

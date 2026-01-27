@@ -19,7 +19,7 @@ mouse-hide-while-typing = true
 # theme = tokyonight
 # theme = Catppuccin Macchiato
 # theme = Kanagawa Wave
-theme = light:gruvbox-light,dark:gruvbox-dark
+theme = light:catppuccin-macchiato-light,dark:catppuccin-macchiato-dark
 clipboard-read = "allow"
 clipboard-paste-protection = false
 

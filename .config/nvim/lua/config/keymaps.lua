@@ -32,3 +32,12 @@ vim.keymap.set("n", "<leader>C", "<cmd>!c %<CR>", { desc = "Open in Cursor" })
 -- end, { desc = "Open in Cursor with Line" })
 map("n", "<leader>yr", "<cmd>let @+ = expand('%:~:.')<cr>", { desc = "Relative Path", silent = true })
 map("n", "<leader>yf", "<cmd>let @+ = expand('%:p')<cr>", { desc = "Full Path", silent = true })
+
+-- Window resizing
+map("n", "<C-Left>", "<C-w><", { desc = "Decrease width" })
+map("n", "<C-Right>", "<C-w>>", { desc = "Increase width" })
+map("n", "<C-Up>", "<C-w>+", { desc = "Increase height" })
+map("n", "<C-Down>", "<C-w>-", { desc = "Decrease height" })
+map("n", "<leader>w=", "<C-w>=", { desc = "Equalize windows" })
+map("n", "<leader>w|", "<C-w>|", { desc = "Maximize width" })
+map("n", "<leader>w_", "<C-w>_", { desc = "Maximize height" })

@@ -37,6 +37,7 @@ return {
     dashboard = { example = "advanced" },
   },
   keys = {
+    { "<leader>e", false },
     {
       "<leader><space>",
       function()
