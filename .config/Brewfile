@@ -76,7 +76,7 @@ brew "imagemagick"
 brew "zk"
 
 # Casks (GUI apps)
-cask "aerospace"
+cask "nikitabobko/tap/aerospace"
 cask "ghostty"
 cask "wezterm"
 cask "karabiner-elements"
