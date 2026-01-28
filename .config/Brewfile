@@ -1,0 +1,86 @@
+# Dotfiles Brewfile - run `brew bundle` to install
+
+# Taps
+tap "arl/arl"
+tap "charmbracelet/tap"
+tap "cormacrelf/tap"
+tap "dlvhdr/formulae"
+tap "felixkratz/formulae"
+tap "jesseduffield/lazydocker"
+tap "jesseduffield/lazygit"
+tap "nikitabobko/tap"
+
+# Core CLI tools
+brew "coreutils"
+brew "curl"
+brew "git"
+brew "git-delta"
+brew "wget"
+brew "jq"
+brew "yq"
+brew "ripgrep"
+brew "fd"
+brew "fzf"
+brew "gnu-sed"
+brew "gawk"
+
+# Shell
+brew "fish"
+brew "starship"
+brew "atuin"
+brew "zoxide"
+
+# Editor
+brew "neovim"
+brew "luarocks"
+
+# Git tools
+brew "gh"
+brew "hub"
+brew "lazygit"
+brew "tig"
+brew "git-recent"
+brew "arl/arl/gitmux"
+
+# Dev tools
+brew "mise"
+brew "uv"
+brew "pnpm"
+brew "fnm"
+brew "ast-grep"
+
+# Terminal utilities
+brew "tmux"
+brew "bat"
+brew "eza"
+brew "btop"
+brew "htop"
+brew "ncdu"
+brew "fzf-make"
+
+# Docker
+brew "docker-compose"
+brew "jesseduffield/lazydocker/lazydocker"
+
+# macOS specific
+brew "cormacrelf/tap/dark-notify"
+brew "felixkratz/formulae/borders"
+brew "terminal-notifier"
+brew "wallpaper"
+
+# Other
+brew "charmbracelet/tap/crush"
+brew "dlvhdr/formulae/diffnav"
+brew "fastfetch"
+brew "imagemagick"
+brew "zk"
+
+# Casks (GUI apps)
+cask "aerospace"
+cask "ghostty"
+cask "wezterm"
+cask "karabiner-elements"
+cask "orbstack"
+cask "font-commit-mono-nerd-font"
+cask "jordanbaird-ice"
+cask "stats"
