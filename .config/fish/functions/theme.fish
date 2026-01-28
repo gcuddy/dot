@@ -103,6 +103,18 @@ function theme --description "Switch themes (usage: theme [name] [light|dark])"
         echo "  gh-dash: updated (restart to apply)"
     end
 
+    # Borders (JankyBorders) - copy and reload
+    if test -f $current_dir/bordersrc
+        cp $current_dir/bordersrc ~/.config/borders/bordersrc
+        chmod +x ~/.config/borders/bordersrc
+        if pgrep -x borders >/dev/null
+            pkill -x borders
+            ~/.config/borders/bordersrc &
+            disown
+        end
+        echo "  Borders: updated"
+    end
+
     # Claude Code
     if command -v claude >/dev/null
         claude config set --global theme $mode 2>/dev/null

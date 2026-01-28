@@ -27,8 +27,8 @@ clipboard-paste-protection = false
 # palette = "0=#1b1b1b"
 # background = "#1b1b1b"
 #
-background-opacity = 0.93
-# background-blur = true
+background-opacity = 0.85
+background-blur-radius = 30
 
 adjust-cell-width = -3%
 font-family = "JetBrainsMono Nerd Font Mono"
