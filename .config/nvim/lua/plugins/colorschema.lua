@@ -41,11 +41,17 @@ return {
       update_interval = 5000,
       set_dark_mode = function()
         vim.o.background = "dark"
-        vim.cmd("colorscheme catppuccin")
+        local f = io.open(vim.fn.expand("~/.config/themes/current/nvim-colorscheme"), "r")
+        local colorscheme = f and f:read("*l") or "catppuccin"
+        if f then f:close() end
+        pcall(vim.cmd, "colorscheme " .. colorscheme)
       end,
       set_light_mode = function()
         vim.o.background = "light"
-        vim.cmd("colorscheme catppuccin")
+        local f = io.open(vim.fn.expand("~/.config/themes/current/nvim-colorscheme"), "r")
+        local colorscheme = f and f:read("*l") or "catppuccin"
+        if f then f:close() end
+        pcall(vim.cmd, "colorscheme " .. colorscheme)
       end,
     },
   },

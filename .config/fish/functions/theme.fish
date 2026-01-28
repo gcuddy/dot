@@ -125,8 +125,15 @@ function theme --description "Switch themes (usage: theme [name] [light|dark])"
             set nvim_colorscheme "catppuccin-macchiato"
     end
 
-    for addr in (find /tmp -name 'nvim.*' -type s 2>/dev/null)
-        nvim --server "$addr" --remote-send "<Cmd>set background=$mode<CR><Cmd>colorscheme $nvim_colorscheme<CR>" 2>/dev/null
+    # Write nvim theme config for auto-dark-mode to read
+    echo "$nvim_colorscheme" > $current_dir/nvim-colorscheme
+
+    # Update running nvim instances (use TMPDIR on macOS)
+    set -l tmpdir (echo $TMPDIR | string trim -r -c '/')
+    for addr in $tmpdir/nvim.*/0 /tmp/nvim.*/0
+        if test -S "$addr"
+            nvim --server "$addr" --remote-send "<Cmd>set background=$mode<CR><Cmd>colorscheme $nvim_colorscheme<CR>" 2>/dev/null
+        end
     end
     echo "  Neovim: set to $nvim_colorscheme ($mode)"
 

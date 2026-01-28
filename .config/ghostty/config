@@ -27,9 +27,10 @@ clipboard-paste-protection = false
 # palette = "0=#1b1b1b"
 # background = "#1b1b1b"
 #
-background-opacity = 0.97
-background-blur = true
+background-opacity = 0.93
+# background-blur = true
 
+adjust-cell-width = -3%
 font-family = "JetBrainsMono Nerd Font Mono"
 # font-family = "CommitMono Nerd Font"
 font-size = 19

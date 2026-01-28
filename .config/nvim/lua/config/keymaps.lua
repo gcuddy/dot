@@ -11,12 +11,10 @@ vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
--- Press 'S' for quick find/replace for the word under the cursor
-vim.keymap.set("n", "S", function()
-  local cmd = ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>"
-  local keys = vim.api.nvim_replace_termcodes(cmd, true, false, true)
-  vim.api.nvim_feedkeys(keys, "n", false)
-end)
+-- Quick find/replace in buffer (rip-substitute)
+vim.keymap.set({ "n", "x" }, "S", function()
+  require("rip-substitute").sub()
+end, { desc = "Rip substitute" })
 
 vim.keymap.set("n", "<leader>C", "<cmd>!c %<CR>", { desc = "Open in Cursor" })
 -- vim.keymap.set("n", "<leader>C", "<cmd>!c %:" .. vim.fn.line(".") .. "<CR>", { desc = "Open in Cursor" })

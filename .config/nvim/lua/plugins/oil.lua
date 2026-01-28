@@ -24,11 +24,17 @@ return {
 		config = function()
 			require("oil").setup({
 				default_file_explorer = true,
+				columns = {
+					"icon",
+					"size",
+					{ "mtime", highlight = "Comment", format = "%Y-%m-%d %H:%M" },
+				},
 				confirmation = {
 					border = "rounded",
 				},
 				float = {
 					border = "rounded",
+					max_width = 120,
 				},
 				keymaps = {
 					["<C-l>"] = false,

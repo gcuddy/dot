@@ -71,7 +71,11 @@ case "$THEME_BASE" in
     "catppuccin-macchiato") NVIM_COLORSCHEME="catppuccin-macchiato" ;;
 esac
 
-for addr in /tmp/nvim.*/0; do
+# Write nvim theme config for auto-dark-mode to read
+echo "$NVIM_COLORSCHEME" > "$HOME/.config/themes/current/nvim-colorscheme"
+
+# Update running nvim instances (TMPDIR on macOS, /tmp on Linux)
+for addr in "$TMPDIR"/nvim.*/0 /tmp/nvim.*/0; do
     if [[ -S "$addr" ]]; then
         nvim --server "$addr" --remote-send "<Cmd>set background=$MODE<CR><Cmd>colorscheme $NVIM_COLORSCHEME<CR>" 2>/dev/null
     fi
