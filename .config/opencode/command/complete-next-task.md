@@ -12,6 +12,16 @@ Complete one task from a PRD file. Implements the next task with `passes: false`
 
 Where `<prd-name>` matches `.opencode/state/<prd-name>/prd.json`
 
+## Before Starting
+
+First, invoke the skill tool to detect the VCS:
+
+```
+skill({ name: 'vcs-detect' })
+```
+
+Use the detected VCS (jj or git) for all version control operations.
+
 ## File Locations
 
 **IMPORTANT**: The `.opencode/state/` directory may not be at cwd. Search for it:
@@ -58,7 +68,7 @@ Once found, use **absolute paths** for all file operations:
     3. Spikes/unknowns
     4. Standard features
     5. Polish/cleanup
-- Check recent history (git: `git log --oneline -10`)
+- Check recent history (jj: `jj log --limit 10`, git: `git log --oneline -10`)
 
 ### 2. Initialize Progress (if needed)
 
@@ -66,33 +76,30 @@ If progress.txt doesn't exist, create it:
 
 ```markdown
 # Progress Log
-
 PRD: <prdName from PRD>
 Started: <YYYY-MM-DD>
 
 ## Codebase Patterns
-
 <!-- Consolidate reusable patterns here -->
 
 ---
-
 <!-- Task logs below - APPEND ONLY -->
 ```
 
 ### 3. Branch Setup
 
 Extract `prdName` from PRD, then:
-
+- jj: `jj new -m '<prdName>'`
 - git: `git checkout -b <prdName>` (or checkout if exists)
 
 ### 4. Implement Task
 
 Work on the single task until verification steps pass.
 
+
 ### 5. Feedback Loops (REQUIRED)
 
 Before committing, run ALL applicable:
-
 - Type checking
 - Tests
 - Linting
@@ -110,7 +117,6 @@ Append to progress.txt:
 
 ```markdown
 ## Task - [task.id]
-
 - What was implemented
 - Files changed
 - **Learnings:** patterns, gotchas
@@ -120,6 +126,7 @@ If you discover a **reusable pattern**, also add to `## Codebase Patterns` at th
 
 ### 8. Commit
 
+- jj: `jj describe -m 'feat(<scope>): <description>' && jj bookmark create <prdName>/<task-id> && jj new`
 - git: `git add -A && git commit -m 'feat(<scope>): <description>'`
 
 Bookmark format: `<prdName>/<task-id>` (e.g., `lib-relay-implementation/types-2`)

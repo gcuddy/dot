@@ -38,3 +38,6 @@ ui_border_faint = "#DDDDDD"
 ui_selected = "#D0D0D0"
 ui_match = "#FFBC5D"
 ui_gray = "#777777"
+
+# App-specific theme names
+nvim_colorscheme = "alabaster"

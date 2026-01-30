@@ -31,7 +31,6 @@ alias lg lazygit
 alias ls="eza --color=always --icons --group-directories-first"
 alias la='eza --color=always --icons --group-directories-first --all'
 alias ll='eza --color=always --icons --group-directories-first --all --long'
-alias c "open $1 -a \"Cursor\""
 # config function is in functions/config.fish
 
 # coverbase specific aliases
@@ -42,6 +41,9 @@ alias alembic:run "docker exec dev-api.irm.cb.local alembic -c /irm/common/alemb
 alias tasker:python "docker exec -it dev-tasker.irm.cb.local python"
 
 # Abbreviations
+abbr -a oc opencode
+abbr -a c clear
+abbr -a pn pnpm
 abbr -a g hub
 abbr -a git hub
 abbr -a ghc 'gh co'
@@ -66,7 +68,7 @@ abbr -a ncdu 'ncdu --color dark'
 abbr -a vi nvim
 abbr -a v nvim
 abbr -a t tmux
-abbr -a ta 'tmux attach -t'
+abbr -a ta 'tmux attach'
 abbr -a tad 'tmux attach -d -t'
 abbr -a ts 'tmux new -s'
 abbr -a tl 'tmux ls'
@@ -81,13 +83,13 @@ abbr -a dlogs 'docker logs -f'
 if status is-interactive
     set -l cache_dir ~/.config/fish/conf.d
     if not test -f $cache_dir/atuin.cached.fish
-        atuin init fish --disable-up-arrow > $cache_dir/atuin.cached.fish
+        atuin init fish --disable-up-arrow >$cache_dir/atuin.cached.fish
     end
     if not test -f $cache_dir/zoxide.cached.fish
-        zoxide init fish > $cache_dir/zoxide.cached.fish
+        zoxide init fish >$cache_dir/zoxide.cached.fish
     end
     if not test -f $cache_dir/mise.cached.fish
-        mise activate fish > $cache_dir/mise.cached.fish
+        mise activate fish >$cache_dir/mise.cached.fish
     end
     source $cache_dir/atuin.cached.fish
     source $cache_dir/zoxide.cached.fish

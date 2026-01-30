@@ -1,27 +1,27 @@
-# Catppuccin Macchiato theme for lazygit
+# Kanagawa Wave theme for lazygit
 gui:
   theme:
     activeBorderColor:
-      - "#8aadf4"
+      - "#7E9CD8"
       - bold
     inactiveViewSelectedLineBgColor:
-      - "#5b6078"
+      - "#2D4F67"
     inactiveBorderColor:
-      - "#6e738d"
+      - "#727169"
     optionsTextColor:
-      - "#8aadf4"
+      - "#7E9CD8"
     selectedLineBgColor:
-      - "#5b6078"
+      - "#2D4F67"
     selectedRangeBgColor:
-      - "#5b6078"
+      - "#2D4F67"
     cherryPickedCommitBgColor:
-      - "#eed49f"
+      - "#3D59A1"
     cherryPickedCommitFgColor:
-      - "#cad3f5"
+      - "#DCD7BA"
     unstagedChangesColor:
-      - "#ed8796"
+      - "#C34043"
     defaultFgColor:
-      - "#cad3f5"
+      - "#DCD7BA"
 git:
   paging:
     colorArg: always

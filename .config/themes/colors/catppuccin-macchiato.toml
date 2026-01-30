@@ -38,3 +38,6 @@ ui_border_faint = "#363a4f"
 ui_selected = "#5b6078"
 ui_match = "#eed49f"
 ui_gray = "#6e738d"
+
+# App-specific theme names
+nvim_colorscheme = "catppuccin"

@@ -38,3 +38,6 @@ ui_border_faint = "#2A2A37"
 ui_selected = "#2D4F67"
 ui_match = "#3D59A1"
 ui_gray = "#727169"
+
+# App-specific theme names
+nvim_colorscheme = "kanagawa"

@@ -19,7 +19,10 @@ mouse-hide-while-typing = true
 # theme = tokyonight
 # theme = Catppuccin Macchiato
 # theme = Kanagawa Wave
-theme = light:catppuccin-macchiato-light,dark:catppuccin-macchiato-dark
+# theme = light:catppuccin-macchiato-light,dark:catppuccin-macchiato-dark
+
+# Load theme from themes system
+config-file = ?~/.config/themes/current/ghostty
 clipboard-read = "allow"
 clipboard-paste-protection = false
 

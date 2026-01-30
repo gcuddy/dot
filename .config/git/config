@@ -68,6 +68,12 @@
   add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
   # log commits between two commit hashes
   logb = "!f() { git log --pretty=format:\"%h %an: %s\" $1...$2; }; f"
+  review-base = "!git merge-base HEAD \"${review_base:-origin/main}\""
+  files = "!git diff --name-only $(git review-base)"
+  stat = "!git diff --stat $(git review-base)"
+  pr-summary = "!git log --reverse --format=\"- **%s** (%h)%n%n%w(74,2,2)%b\" \"${review_base:-origin/main}\"..HEAD"
+  review = "!$EDITOR $(git files)"
+  reviewf = "!$EDITOR -p $(git files | fzf -m --reverse --height 40%)"
 [merge]
     conflictstyle = diff3
 [diff]

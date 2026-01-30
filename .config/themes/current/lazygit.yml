@@ -1,27 +1,27 @@
-# Catppuccin Macchiato theme for lazygit
+# Gruvbox Dark theme for lazygit
 gui:
   theme:
     activeBorderColor:
-      - "#8aadf4"
+      - "#83a598"
       - bold
     inactiveViewSelectedLineBgColor:
-      - "#5b6078"
+      - "#504945"
     inactiveBorderColor:
-      - "#6e738d"
+      - "#928374"
     optionsTextColor:
-      - "#8aadf4"
+      - "#83a598"
     selectedLineBgColor:
-      - "#5b6078"
+      - "#504945"
     selectedRangeBgColor:
-      - "#5b6078"
+      - "#504945"
     cherryPickedCommitBgColor:
-      - "#eed49f"
+      - "#fabd2f"
     cherryPickedCommitFgColor:
-      - "#cad3f5"
+      - "#ebdbb2"
     unstagedChangesColor:
-      - "#ed8796"
+      - "#cc241d"
     defaultFgColor:
-      - "#cad3f5"
+      - "#ebdbb2"
 git:
   paging:
     colorArg: always

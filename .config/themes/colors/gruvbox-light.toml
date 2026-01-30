@@ -38,3 +38,6 @@ ui_border_faint = "#ebdbb2"
 ui_selected = "#d5c4a1"
 ui_match = "#fabd2f"
 ui_gray = "#928374"
+
+# App-specific theme names
+nvim_colorscheme = "gruvbox"

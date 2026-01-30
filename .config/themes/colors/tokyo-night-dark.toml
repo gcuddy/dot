@@ -38,3 +38,6 @@ ui_border_faint = "#1f2335"
 ui_selected = "#364A82"
 ui_match = "#3d59a1"
 ui_gray = "#565f89"
+
+# App-specific theme names
+nvim_colorscheme = "tokyonight"

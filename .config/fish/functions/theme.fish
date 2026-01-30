@@ -17,6 +17,14 @@ function theme --description "Switch themes (usage: theme [name] [light|dark])"
                 echo "  $name"
             end
             return 0
+        else if test "$arg" = "current" -o "$arg" = "status"
+            set -l base (cat $current_dir/theme.base 2>/dev/null || echo "unknown")
+            set -l appearance (cat $current_dir/theme.appearance 2>/dev/null || echo "unknown")
+            set -l name (cat $current_dir/theme.name 2>/dev/null || echo "unknown")
+            echo "Theme: $name"
+            echo "Base:  $base"
+            echo "Mode:  $appearance"
+            return 0
         else
             set theme_name $arg
         end

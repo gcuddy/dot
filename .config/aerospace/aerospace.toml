@@ -16,7 +16,7 @@ enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
 # Layout defaults
-accordion-padding = 0
+accordion-padding = 30
 default-root-container-layout = 'accordion'
 default-root-container-orientation = 'auto'
 
@@ -104,6 +104,8 @@ alt-c = 'workspace C'
 alt-u = 'workspace U'
 alt-o = 'workspace O'
 alt-p = 'workspace P'
+alt-i = 'workspace I'
+alt-g = 'workspace G'
 
 # Move window to workspace - numbered (alt-shift-N)
 alt-shift-1 = 'move-node-to-workspace 1'
@@ -125,12 +127,15 @@ alt-shift-c = 'move-node-to-workspace C'
 alt-shift-u = 'move-node-to-workspace U'
 alt-shift-o = 'move-node-to-workspace O'
 alt-shift-p = 'move-node-to-workspace P'
+alt-shift-i = 'move-node-to-workspace I'
+alt-shift-g = 'move-node-to-workspace G'
 
 # Misc
 alt-tab = 'workspace-back-and-forth'
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 alt-shift-r = 'reload-config'
 alt-shift-semicolon = 'mode service'
+alt-r = 'mode resize'
 
 # Service mode
 [mode.service.binding]
@@ -143,6 +148,15 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
+
+# Resize mode
+[mode.resize.binding]
+h = 'resize width -50'
+l = 'resize width +50'
+j = 'resize height +50'
+k = 'resize height -50'
+enter = 'mode main'
+esc = 'mode main'
 
 # Window detection rules
 # IMPORTANT: Order matters! More specific rules first.
@@ -178,7 +192,7 @@ run = ['layout tiling', 'move-node-to-workspace B']
 
 [[on-window-detected]]
 if.app-id = 'net.imput.helium'
-run = ['layout tiling', 'move-node-to-workspace B']
+run = ['layout tiling', 'move-node-to-workspace U']
 
 # Destination apps - auto-assign to workspaces
 [[on-window-detected]]
@@ -187,6 +201,10 @@ run = ['layout tiling', 'move-node-to-workspace S']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
+run = ['layout tiling', 'move-node-to-workspace M']
+
+[[on-window-detected]]
+if.app-id = 'com.readdle.SparkDesktop'
 run = ['layout tiling', 'move-node-to-workspace M']
 
 [[on-window-detected]]
@@ -213,5 +231,21 @@ run = ['layout tiling', 'move-node-to-workspace P']
 if.app-id = 'dev.kdrag0n.MacVirt'
 run = ['layout tiling', 'move-node-to-workspace P']
 
+[[on-window-detected]]
+if.app-id = 'com.linear'
+run = ['layout tiling', 'move-node-to-workspace I']
+
+[[on-window-detected]]
+if.app-id = 'com.granola.app'
+run = ['layout tiling', 'move-node-to-workspace G']
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = ['layout tiling', 'move-node-to-workspace U']
+
+[[on-window-detected]]
+if.app-id = 'com.chabomakers.Antinote'
+run = ['layout floating']
+
 # Flexible apps - NO auto-assign (lands where you are)
-# Ghostty, Chrome, Helium, Cursor intentionally omitted
+# Chrome, Cursor intentionally omitted
