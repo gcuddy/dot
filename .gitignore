@@ -47,9 +47,18 @@ Applications/
 .config/nvim.bak*/
 .config/fish.bak/
 
-# Machine-specific
+# Theme-generated (changes on every theme switch)
+.config/themes/current/
 .config/tmux/theme-current.conf
 .config/lazygit/theme-current.yml
+.config/lazygit/config.yml
+.config/gh-dash/config.yml
+.config/nvim/lua/plugins/theme-current.lua
+.config/sketchybar/theme-colors.sh
+.config/btop/themes/current.theme
+.config/borders/bordersrc
+
+# Machine-specific
 .config/github-copilot/
 .config/configstore/
 .config/op/
