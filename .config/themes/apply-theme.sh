@@ -126,6 +126,22 @@ if pgrep -x ghostty &>/dev/null; then
     echo "  ghostty: reloaded"
 fi
 
+# OpenCode - generate and install custom theme from template
+# "system" detection doesn't work through tmux (OSC queries not wrapped with DCS passthrough)
+OPENCODE_THEMES_DIR="$HOME/.config/opencode/themes"
+OPENCODE_CONFIG="$HOME/.config/opencode/opencode.json"
+if [[ -f "$OUTPUT_DIR/opencode-theme.json" ]]; then
+    mkdir -p "$OPENCODE_THEMES_DIR"
+    cp "$OUTPUT_DIR/opencode-theme.json" "$OPENCODE_THEMES_DIR/current.json"
+    
+    # Set opencode to use our generated theme
+    if [[ -f "$OPENCODE_CONFIG" ]]; then
+        jq '.theme = "current"' "$OPENCODE_CONFIG" > "$OPENCODE_CONFIG.tmp" && \
+            mv "$OPENCODE_CONFIG.tmp" "$OPENCODE_CONFIG"
+    fi
+    echo "  opencode: theme updated (restart to apply)"
+fi
+
 # Neovim - copy theme config and update running instances
 NVIM_THEME_SRC="$THEMES_DIR/neovim/$BASENAME.lua"
 NVIM_THEME_DST="$HOME/.config/nvim/lua/plugins/theme-current.lua"

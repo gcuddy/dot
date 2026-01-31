@@ -55,7 +55,7 @@ return {
       filter = "ristretto",
     },
   },
-  { "stevedylandev/flexoki-nvim", name = "flexoki", lazy = true },
+  { "kepano/flexoki-neovim", name = "flexoki", lazy = true },
 
   -- Auto dark mode for live theme switching
   {

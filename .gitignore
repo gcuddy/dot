@@ -57,6 +57,7 @@ Applications/
 .config/sketchybar/theme-colors.sh
 .config/btop/themes/current.theme
 .config/borders/bordersrc
+.config/opencode/themes/current.json
 
 # Machine-specific
 .config/github-copilot/
