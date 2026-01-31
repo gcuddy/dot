@@ -2,53 +2,37 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 
-# Get media info using osascript
-STATE=$(osascript -e 'tell application "System Events"
-    set _apps to {"Spotify", "Music", "Podcasts", "Arc"}
-    repeat with _app in _apps
-        if application process _app exists then
-            try
-                tell application _app
-                    if player state is playing then
-                        return "playing"
-                    end if
-                end tell
-            end try
-        end if
-    end repeat
-    return "stopped"
-end tell' 2>/dev/null)
+# Use media-control (works with Apple Music, Spotify, browser media, etc.)
+# https://github.com/ungive/media-control
 
-if [[ "$STATE" == "playing" ]]; then
-    # Try to get track info
-    INFO=$(osascript -e 'tell application "System Events"
-        set _apps to {"Spotify", "Music"}
-        repeat with _app in _apps
-            if application process _app exists then
-                try
-                    tell application _app
-                        if player state is playing then
-                            set _track to name of current track
-                            set _artist to artist of current track
-                            return _track & " - " & _artist
-                        end if
-                    end tell
-                end try
-            end if
-        end repeat
-        return ""
-    end tell' 2>/dev/null)
+if ! command -v media-control &>/dev/null; then
+    sketchybar --set "$NAME" drawing=off
+    exit 0
+fi
+
+# Get media info (exclude artwork to keep it fast)
+DATA=$(media-control get 2>/dev/null | jq -r '{playing, title, artist}')
+
+PLAYING=$(echo "$DATA" | jq -r '.playing')
+TITLE=$(echo "$DATA" | jq -r '.title // empty')
+ARTIST=$(echo "$DATA" | jq -r '.artist // empty')
+
+if [[ "$PLAYING" == "true" && -n "$TITLE" ]]; then
+    if [[ -n "$ARTIST" ]]; then
+        LABEL="$TITLE - $ARTIST"
+    else
+        LABEL="$TITLE"
+    fi
     
     # Truncate if too long
-    if [[ ${#INFO} -gt 40 ]]; then
-        INFO="${INFO:0:37}..."
+    if [[ ${#LABEL} -gt 40 ]]; then
+        LABEL="${LABEL:0:37}..."
     fi
     
     sketchybar --set "$NAME" \
         icon="󰎈" \
         icon.color=$ACCENT_COLOR \
-        label="$INFO" \
-        label.drawing=on \
+        label="$LABEL" \
         drawing=on
 else
     sketchybar --set "$NAME" drawing=off
