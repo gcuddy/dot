@@ -83,7 +83,7 @@
     "edit": "allow",
     "webfetch": "ask"
   },
-  "theme": "catppuccin-macchiato",
+  "theme": "system",
   "keybinds": {
     "leader": "ctrl+o",
     "messages_half_page_up": "ctrl+u",
