@@ -126,7 +126,15 @@ if pgrep -x ghostty &>/dev/null; then
     echo "  ghostty: reloaded"
 fi
 
-# Neovim - update running instances
+# Neovim - copy theme config and update running instances
+NVIM_THEME_SRC="$THEMES_DIR/neovim/$BASENAME.lua"
+NVIM_THEME_DST="$HOME/.config/nvim/lua/plugins/theme-current.lua"
+if [[ -f "$NVIM_THEME_SRC" ]]; then
+    cp "$NVIM_THEME_SRC" "$NVIM_THEME_DST"
+    echo "  nvim: theme config copied (restart nvim to apply new plugins)"
+fi
+
+# Also update running nvim instances with colorscheme
 if [[ -f "$OUTPUT_DIR/nvim-colorscheme" ]]; then
     NVIM_COLORSCHEME=$(cat "$OUTPUT_DIR/nvim-colorscheme")
     TMPDIR_CLEAN=$(echo "${TMPDIR:-/tmp}" | sed 's:/$::')
@@ -136,7 +144,7 @@ if [[ -f "$OUTPUT_DIR/nvim-colorscheme" ]]; then
             nvim --server "$addr" --remote-send "<Cmd>set background=$APPEARANCE<CR><Cmd>colorscheme $NVIM_COLORSCHEME<CR>" 2>/dev/null || true
         fi
     done
-    echo "  nvim: updated (colorscheme: $NVIM_COLORSCHEME)"
+    echo "  nvim: colorscheme updated ($NVIM_COLORSCHEME)"
 fi
 
 # Claude Code - set theme mode
@@ -163,6 +171,23 @@ if [[ -f "$OBSIDIAN_CONFIG" ]]; then
     if [[ $obsidian_updated -gt 0 ]]; then
         echo "  obsidian: updated $obsidian_updated vault(s) to $APPEARANCE mode"
     fi
+fi
+
+# Wallpaper - set desktop background from theme backgrounds
+BACKGROUNDS_DIR="$THEMES_DIR/backgrounds/$BASENAME"
+if [[ -d "$BACKGROUNDS_DIR" ]]; then
+    # Find images (jpg, jpeg, png) sorted alphabetically, pick first one
+    WALLPAPER=$(find "$BACKGROUNDS_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | sort | head -1)
+    if [[ -n "$WALLPAPER" ]]; then
+        # Store current wallpaper path for reference
+        echo "$WALLPAPER" > "$OUTPUT_DIR/wallpaper"
+        
+        # Set wallpaper on macOS
+        osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$WALLPAPER\"" 2>/dev/null || true
+        echo "  wallpaper: $(basename "$WALLPAPER")"
+    fi
+else
+    echo "  wallpaper: no backgrounds found for $BASENAME"
 fi
 
 # Chrome - requires sudo, just show instructions

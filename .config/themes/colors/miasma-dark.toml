@@ -1,0 +1,43 @@
+# Miasma theme
+name = "Miasma"
+appearance = "dark"
+
+# Core colors
+foreground = "#c2c2b0"
+background = "#222222"
+cursor = "#c7c7c7"
+cursor_text = "#222222"
+selection_background = "#78824b"
+selection_foreground = "#c2c2b0"
+accent = "#78824b"
+
+# Normal colors (0-7)
+color0 = "#000000"
+color1 = "#685742"
+color2 = "#5f875f"
+color3 = "#b36d43"
+color4 = "#78824b"
+color5 = "#bb7744"
+color6 = "#c9a554"
+color7 = "#d7c483"
+
+# Bright colors (8-15)
+color8 = "#666666"
+color9 = "#685742"
+color10 = "#5f875f"
+color11 = "#b36d43"
+color12 = "#78824b"
+color13 = "#bb7744"
+color14 = "#c9a554"
+color15 = "#d7c483"
+
+# UI colors
+ui_border = "#78824b"
+ui_border_secondary = "#666666"
+ui_border_faint = "#333333"
+ui_selected = "#666666"
+ui_match = "#c9a554"
+ui_gray = "#666666"
+
+# App-specific theme names
+nvim_colorscheme = "miasma"

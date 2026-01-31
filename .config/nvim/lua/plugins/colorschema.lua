@@ -1,7 +1,10 @@
+-- All colorscheme plugins (lazy-loaded for theme switching)
+-- The active theme is set in theme-current.lua (managed by apply-theme.sh)
 return {
-  { "catppuccin/nvim", lazy = true, opts = { flavour = "macchiato", transparent_background = true } },
+  -- Existing themes
+  { "catppuccin/nvim", name = "catppuccin", lazy = true, opts = { flavour = "macchiato", transparent_background = true } },
   { "kvrohit/rasmus.nvim", lazy = true },
-  { "p00f/alabaster.nvim" },
+  { "p00f/alabaster.nvim", lazy = true },
   { "olivercederborg/poimandres.nvim", lazy = true },
   { "rebelot/kanagawa.nvim", lazy = true },
   { "yorickpeterse/vim-paper", name = "vim-paper", lazy = true, dev = { true } },
@@ -35,6 +38,26 @@ return {
       transparent_mode = true,
     },
   },
+
+  -- New themes from omarchy
+  { "EdenEast/nightfox.nvim", lazy = true }, -- nord (nordfox)
+  { "rose-pine/neovim", name = "rose-pine", lazy = true },
+  { "bjarneo/ethereal.nvim", lazy = true },
+  { "neanias/everforest-nvim", lazy = true },
+  { "bjarneo/hackerman.nvim", lazy = true, dependencies = { "bjarneo/aether.nvim" } },
+  { "tahayvr/matteblack.nvim", lazy = true },
+  { "xero/miasma.nvim", lazy = true },
+  { "ribru17/bamboo.nvim", lazy = true }, -- osaka-jade
+  {
+    "loctvl842/monokai-pro.nvim",
+    lazy = true,
+    opts = {
+      filter = "ristretto",
+    },
+  },
+  { "stevedylandev/flexoki-nvim", name = "flexoki", lazy = true },
+
+  -- Auto dark mode for live theme switching
   {
     "f-person/auto-dark-mode.nvim",
     opts = {
@@ -53,12 +76,6 @@ return {
         if f then f:close() end
         pcall(vim.cmd, "colorscheme " .. colorscheme)
       end,
-    },
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin",
     },
   },
 }

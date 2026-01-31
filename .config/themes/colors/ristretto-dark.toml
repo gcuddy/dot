@@ -1,0 +1,43 @@
+# Ristretto theme (Monokai Pro variant)
+name = "Ristretto"
+appearance = "dark"
+
+# Core colors
+foreground = "#e6d9db"
+background = "#2c2525"
+cursor = "#c3b7b8"
+cursor_text = "#2c2525"
+selection_background = "#403e41"
+selection_foreground = "#e6d9db"
+accent = "#f38d70"
+
+# Normal colors (0-7)
+color0 = "#72696a"
+color1 = "#fd6883"
+color2 = "#adda78"
+color3 = "#f9cc6c"
+color4 = "#f38d70"
+color5 = "#a8a9eb"
+color6 = "#85dacc"
+color7 = "#e6d9db"
+
+# Bright colors (8-15)
+color8 = "#948a8b"
+color9 = "#ff8297"
+color10 = "#c8e292"
+color11 = "#fcd675"
+color12 = "#f8a788"
+color13 = "#bebffd"
+color14 = "#9bf1e1"
+color15 = "#f1e5e7"
+
+# UI colors
+ui_border = "#f38d70"
+ui_border_secondary = "#72696a"
+ui_border_faint = "#403e41"
+ui_selected = "#403e41"
+ui_match = "#f9cc6c"
+ui_gray = "#948a8b"
+
+# App-specific theme names
+nvim_colorscheme = "monokai-pro"

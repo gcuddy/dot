@@ -1,0 +1,43 @@
+# Catppuccin Latte (light) theme
+name = "Catppuccin Latte"
+appearance = "light"
+
+# Core colors
+foreground = "#4c4f69"
+background = "#eff1f5"
+cursor = "#dc8a78"
+cursor_text = "#eff1f5"
+selection_background = "#dc8a78"
+selection_foreground = "#eff1f5"
+accent = "#1e66f5"
+
+# Normal colors (0-7)
+color0 = "#bcc0cc"
+color1 = "#d20f39"
+color2 = "#40a02b"
+color3 = "#df8e1d"
+color4 = "#1e66f5"
+color5 = "#ea76cb"
+color6 = "#179299"
+color7 = "#5c5f77"
+
+# Bright colors (8-15)
+color8 = "#acb0be"
+color9 = "#d20f39"
+color10 = "#40a02b"
+color11 = "#df8e1d"
+color12 = "#1e66f5"
+color13 = "#ea76cb"
+color14 = "#179299"
+color15 = "#6c6f85"
+
+# UI colors
+ui_border = "#1e66f5"
+ui_border_secondary = "#acb0be"
+ui_border_faint = "#ccd0da"
+ui_selected = "#ccd0da"
+ui_match = "#df8e1d"
+ui_gray = "#9ca0b0"
+
+# App-specific theme names
+nvim_colorscheme = "catppuccin-latte"

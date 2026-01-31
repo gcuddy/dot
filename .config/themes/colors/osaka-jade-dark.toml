@@ -1,0 +1,43 @@
+# Osaka Jade theme
+name = "Osaka Jade"
+appearance = "dark"
+
+# Core colors
+foreground = "#C1C497"
+background = "#111c18"
+cursor = "#D7C995"
+cursor_text = "#111C18"
+selection_background = "#C1C497"
+selection_foreground = "#111C18"
+accent = "#509475"
+
+# Normal colors (0-7)
+color0 = "#23372B"
+color1 = "#FF5345"
+color2 = "#549e6a"
+color3 = "#459451"
+color4 = "#509475"
+color5 = "#D2689C"
+color6 = "#2DD5B7"
+color7 = "#F6F5DD"
+
+# Bright colors (8-15)
+color8 = "#53685B"
+color9 = "#db9f9c"
+color10 = "#63b07a"
+color11 = "#E5C736"
+color12 = "#ACD4CF"
+color13 = "#75bbb3"
+color14 = "#8CD3CB"
+color15 = "#9eebb3"
+
+# UI colors
+ui_border = "#509475"
+ui_border_secondary = "#53685B"
+ui_border_faint = "#23372B"
+ui_selected = "#53685B"
+ui_match = "#E5C736"
+ui_gray = "#53685B"
+
+# App-specific theme names
+nvim_colorscheme = "bamboo"

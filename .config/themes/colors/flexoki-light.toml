@@ -1,0 +1,43 @@
+# Flexoki Light theme
+name = "Flexoki Light"
+appearance = "light"
+
+# Core colors
+foreground = "#100F0F"
+background = "#FFFCF0"
+cursor = "#100F0F"
+cursor_text = "#FFFCF0"
+selection_background = "#CECDC3"
+selection_foreground = "#100F0F"
+accent = "#205EA6"
+
+# Normal colors (0-7)
+color0 = "#100F0F"
+color1 = "#D14D41"
+color2 = "#879A39"
+color3 = "#D0A215"
+color4 = "#205EA6"
+color5 = "#CE5D97"
+color6 = "#3AA99F"
+color7 = "#FFFCF0"
+
+# Bright colors (8-15)
+color8 = "#100F0F"
+color9 = "#D14D41"
+color10 = "#879A39"
+color11 = "#D0A215"
+color12 = "#4385BE"
+color13 = "#CE5D97"
+color14 = "#3AA99F"
+color15 = "#FFFCF0"
+
+# UI colors
+ui_border = "#205EA6"
+ui_border_secondary = "#CECDC3"
+ui_border_faint = "#E6E4D9"
+ui_selected = "#CECDC3"
+ui_match = "#D0A215"
+ui_gray = "#878580"
+
+# App-specific theme names
+nvim_colorscheme = "flexoki"
