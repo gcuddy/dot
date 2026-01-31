@@ -93,16 +93,20 @@ sketchybar --add item clock center \
         script="$PLUGIN_DIR/clock.sh" \
         click_script="$PLUGIN_DIR/clock.sh toggle"
 
-# Media (now playing)
+# Media (now playing with artwork)
 sketchybar --add item media center \
     --set media \
         icon.font="JetBrainsMono Nerd Font:Bold:14.0" \
+        icon.width=22 \
+        icon.background.drawing=off \
+        icon.background.image.corner_radius=4 \
         label.font="JetBrainsMono Nerd Font:Regular:11.0" \
-        label.max_chars=45 \
-        update_freq=5 \
+        label.max_chars=40 \
+        label.color=$FOREGROUND \
+        background.padding_left=4 \
+        update_freq=3 \
         script="$PLUGIN_DIR/media.sh" \
-        click_script="osascript -e 'tell application \"System Events\" to keystroke space using {command down}'" \
-    --subscribe media media_change
+        click_script="media-control toggle-play-pause"
 
 ##### Right Items #####
 
