@@ -182,5 +182,15 @@ if [[ -f "$OUTPUT_DIR/chrome-theme.plist" ]]; then
     fi
 fi
 
+# SketchyBar - copy colors and reload
+if [[ -f "$OUTPUT_DIR/sketchybar-colors.sh" ]]; then
+    cp "$OUTPUT_DIR/sketchybar-colors.sh" "$HOME/.config/sketchybar/theme-colors.sh"
+    chmod +x "$HOME/.config/sketchybar/theme-colors.sh"
+    if pgrep -x sketchybar &>/dev/null; then
+        sketchybar --reload
+    fi
+    echo "  sketchybar: updated"
+fi
+
 echo ""
 echo "Theme applied: $THEME_NAME ($APPEARANCE)"
