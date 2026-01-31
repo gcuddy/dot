@@ -13,6 +13,8 @@ font-feature = -calt
 
 # Window
 window-save-state = always
+window-colorspace = display-p3
+window-padding-color = background
 window-padding-x = 14
 window-padding-y = 14
 confirm-close-surface = true
