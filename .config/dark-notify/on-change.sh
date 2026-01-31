@@ -7,10 +7,19 @@ THEMES_DIR="$HOME/.config/themes"
 CURRENT_DIR="$THEMES_DIR/current"
 COLORS_DIR="$THEMES_DIR/colors"
 
-# Get current theme base name
+# Get current theme info
 THEME_BASE="alabaster"
+CURRENT_APPEARANCE=""
 if [[ -f "$CURRENT_DIR/theme.base" ]]; then
     THEME_BASE=$(cat "$CURRENT_DIR/theme.base")
+fi
+if [[ -f "$CURRENT_DIR/theme.appearance" ]]; then
+    CURRENT_APPEARANCE=$(cat "$CURRENT_DIR/theme.appearance")
+fi
+
+# Skip if already at requested appearance (prevents loop when apply-theme.sh triggers us)
+if [[ "$MODE" == "$CURRENT_APPEARANCE" ]]; then
+    exit 0
 fi
 
 # Find colors file

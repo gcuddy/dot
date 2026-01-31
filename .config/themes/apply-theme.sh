@@ -49,19 +49,30 @@ done
 
 rm "$sed_script"
 
-# Store current theme info
-cp "$COLORS_FILE" "$OUTPUT_DIR/colors.toml"
+# Extract theme metadata FIRST (before any osascript that triggers dark-notify)
 THEME_NAME=$(grep -E "^name\s*=" "$COLORS_FILE" | head -1 | sed 's/^name[[:space:]]*=[[:space:]]*"\(.*\)"/\1/')
 APPEARANCE=$(grep -E "^appearance\s*=" "$COLORS_FILE" | head -1 | sed 's/^appearance[[:space:]]*=[[:space:]]*"\(.*\)"/\1/')
+BASENAME=$(basename "$COLORS_FILE" .toml | sed -E 's/-(dark|light)$//')
+
+# Store current theme info BEFORE triggering dark-notify
+cp "$COLORS_FILE" "$OUTPUT_DIR/colors.toml"
 echo "$THEME_NAME" > "$OUTPUT_DIR/theme.name"
 echo "$APPEARANCE" > "$OUTPUT_DIR/theme.appearance"
-
-# Extract base theme name (e.g., "gruvbox" from "gruvbox-dark.toml")
-BASENAME=$(basename "$COLORS_FILE" .toml | sed -E 's/-(dark|light)$//')
 echo "$BASENAME" > "$OUTPUT_DIR/theme.base"
 
 echo ""
 echo "Installing configs..."
+
+# macOS - set system appearance to match theme
+# NOTE: This triggers dark-notify, which reads theme.base/appearance (now already set above)
+if command -v osascript &>/dev/null; then
+    if [[ "$APPEARANCE" == "dark" ]]; then
+        osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to true' &>/dev/null || true
+    else
+        osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to false' &>/dev/null || true
+    fi
+    echo "  macos: set to $APPEARANCE"
+fi
 
 # Borders - copy and restart
 if [[ -f "$OUTPUT_DIR/bordersrc" ]]; then

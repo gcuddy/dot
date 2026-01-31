@@ -1,4 +1,4 @@
-# Gruvbox Dark theme for gh-dash
+# Nord theme for gh-dash
 theme:
   ui:
     sectionsShowCount: true
@@ -6,15 +6,15 @@ theme:
       compact: false
   colors:
     text:
-      primary: "#ebdbb2"
-      secondary: "#928374"
-      inverted: "#1d2021"
-      faint: "#928374"
-      warning: "#d79921"
-      success: "#98971a"
+      primary: "#d8dee9"
+      secondary: "#4c566a"
+      inverted: "#2e3440"
+      faint: "#4c566a"
+      warning: "#ebcb8b"
+      success: "#a3be8c"
     background:
-      selected: "#504945"
+      selected: "#4c566a"
     border:
-      primary: "#504945"
-      secondary: "#3c3836"
-      faint: "#282828"
+      primary: "#81a1c1"
+      secondary: "#4c566a"
+      faint: "#3b4252"
