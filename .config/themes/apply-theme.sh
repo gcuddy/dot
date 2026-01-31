@@ -57,7 +57,7 @@ echo "$THEME_NAME" > "$OUTPUT_DIR/theme.name"
 echo "$APPEARANCE" > "$OUTPUT_DIR/theme.appearance"
 
 # Extract base theme name (e.g., "gruvbox" from "gruvbox-dark.toml")
-BASENAME=$(basename "$COLORS_FILE" .toml | sed 's/-\(dark\|light\)$//')
+BASENAME=$(basename "$COLORS_FILE" .toml | sed -E 's/-(dark|light)$//')
 echo "$BASENAME" > "$OUTPUT_DIR/theme.base"
 
 echo ""
