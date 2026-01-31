@@ -5,8 +5,9 @@
 set -e
 
 COLORS_FILE="$1"
-TEMPLATES_DIR="$HOME/.config/themes/templates"
-OUTPUT_DIR="$HOME/.config/themes/current"
+THEMES_DIR="$HOME/.config/themes"
+TEMPLATES_DIR="$THEMES_DIR/templates"
+OUTPUT_DIR="$THEMES_DIR/current"
 
 if [[ ! -f "$COLORS_FILE" ]]; then
     echo "Error: Colors file not found: $COLORS_FILE" >&2
@@ -50,80 +51,126 @@ rm "$sed_script"
 
 # Store current theme info
 cp "$COLORS_FILE" "$OUTPUT_DIR/colors.toml"
-grep -E "^name\s*=" "$COLORS_FILE" | head -1 | sed 's/^name[[:space:]]*=[[:space:]]*"\(.*\)"/\1/' > "$OUTPUT_DIR/theme.name"
-grep -E "^appearance\s*=" "$COLORS_FILE" | head -1 | sed 's/^appearance[[:space:]]*=[[:space:]]*"\(.*\)"/\1/' > "$OUTPUT_DIR/theme.appearance"
+THEME_NAME=$(grep -E "^name\s*=" "$COLORS_FILE" | head -1 | sed 's/^name[[:space:]]*=[[:space:]]*"\(.*\)"/\1/')
+APPEARANCE=$(grep -E "^appearance\s*=" "$COLORS_FILE" | head -1 | sed 's/^appearance[[:space:]]*=[[:space:]]*"\(.*\)"/\1/')
+echo "$THEME_NAME" > "$OUTPUT_DIR/theme.name"
+echo "$APPEARANCE" > "$OUTPUT_DIR/theme.appearance"
 
-# Apply borders theme and restart
-BORDERS_THEME="$OUTPUT_DIR/bordersrc"
-BORDERS_CONF="$HOME/.config/borders/bordersrc"
+# Extract base theme name (e.g., "gruvbox" from "gruvbox-dark.toml")
+BASENAME=$(basename "$COLORS_FILE" .toml | sed 's/-\(dark\|light\)$//')
+echo "$BASENAME" > "$OUTPUT_DIR/theme.base"
 
-if [[ -f "$BORDERS_THEME" ]]; then
-    cp "$BORDERS_THEME" "$BORDERS_CONF"
-    # Restart borders if running
+echo ""
+echo "Installing configs..."
+
+# Borders - copy and restart
+if [[ -f "$OUTPUT_DIR/bordersrc" ]]; then
+    cp "$OUTPUT_DIR/bordersrc" "$HOME/.config/borders/bordersrc"
+    chmod +x "$HOME/.config/borders/bordersrc"
     if pgrep -x borders &>/dev/null; then
-        brew services restart borders 2>/dev/null || killall borders 2>/dev/null
-        echo "borders restarted"
+        brew services restart borders 2>/dev/null || (pkill -x borders; "$HOME/.config/borders/bordersrc" &)
+    fi
+    echo "  borders: updated"
+fi
+
+# btop - copy theme
+if [[ -f "$OUTPUT_DIR/btop.theme" && -d "$HOME/.config/btop/themes" ]]; then
+    cp "$OUTPUT_DIR/btop.theme" "$HOME/.config/btop/themes/current.theme"
+    if [[ -f "$HOME/.config/btop/btop.conf" ]]; then
+        sed -i '' 's/^color_theme = .*/color_theme = "current"/' "$HOME/.config/btop/btop.conf"
+    fi
+    echo "  btop: updated"
+fi
+
+# tmux - copy and reload
+if [[ -f "$OUTPUT_DIR/tmux.conf" ]]; then
+    cp "$OUTPUT_DIR/tmux.conf" "$HOME/.config/tmux/theme-current.conf"
+    if command -v tmux &>/dev/null && tmux list-sessions &>/dev/null 2>&1; then
+        tmux source-file "$HOME/.config/tmux/tmux.conf" 2>/dev/null
+    fi
+    echo "  tmux: updated"
+fi
+
+# lazygit - copy theme
+if [[ -f "$OUTPUT_DIR/lazygit.yml" ]]; then
+    cp "$OUTPUT_DIR/lazygit.yml" "$HOME/.config/lazygit/theme-current.yml"
+    echo "  lazygit: updated (restart to apply)"
+fi
+
+# gh-dash - merge with base config
+if [[ -f "$OUTPUT_DIR/gh-dash.yml" && -f "$HOME/.config/gh-dash/config-base.yml" ]]; then
+    if command -v yq &>/dev/null; then
+        yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
+            "$HOME/.config/gh-dash/config-base.yml" "$OUTPUT_DIR/gh-dash.yml" \
+            > "$HOME/.config/gh-dash/config.yml"
+        echo "  gh-dash: updated (restart to apply)"
+    else
+        cp "$OUTPUT_DIR/gh-dash.yml" "$HOME/.config/gh-dash/theme-current.yml"
+        echo "  gh-dash: updated (yq not found, copied as theme-current.yml)"
     fi
 fi
 
-# Apply btop theme
-BTOP_THEME="$OUTPUT_DIR/btop.theme"
-BTOP_THEMES_DIR="$HOME/.config/btop/themes"
-BTOP_CONF="$HOME/.config/btop/btop.conf"
-
-if [[ -f "$BTOP_THEME" && -d "$BTOP_THEMES_DIR" ]]; then
-    cp "$BTOP_THEME" "$BTOP_THEMES_DIR/current.theme"
-    # Update btop.conf to use "current" theme
-    if [[ -f "$BTOP_CONF" ]]; then
-        sed -i '' 's/^color_theme = .*/color_theme = "current"/' "$BTOP_CONF"
-        echo "btop theme applied"
-    fi
+# Ghostty - reload config
+if pgrep -x ghostty &>/dev/null; then
+    osascript -e 'tell application "System Events" to tell process "Ghostty" to click menu item "Reload Configuration" of menu "Ghostty" of menu bar item "Ghostty" of menu bar 1' &>/dev/null || true
+    echo "  ghostty: reloaded"
 fi
 
-# Apply Chrome/Chromium theme via managed preferences (requires sudo)
-CHROME_THEME_PLIST="$OUTPUT_DIR/chrome-theme.plist"
-MANAGED_PREFS_DIR="/Library/Managed Preferences"
-
-if [[ -f "$CHROME_THEME_PLIST" ]]; then
-    echo "Applying Chrome browser theme..."
+# Neovim - update running instances
+if [[ -f "$OUTPUT_DIR/nvim-colorscheme" ]]; then
+    NVIM_COLORSCHEME=$(cat "$OUTPUT_DIR/nvim-colorscheme")
+    TMPDIR_CLEAN=$(echo "${TMPDIR:-/tmp}" | sed 's:/$::')
     
-    # Check if we can write to managed prefs (need sudo)
-    if [[ -w "$MANAGED_PREFS_DIR" ]] || sudo -n true 2>/dev/null; then
-        # Merge with existing Chrome managed prefs or create new
-        CHROME_MANAGED="$MANAGED_PREFS_DIR/com.google.Chrome.plist"
-        
+    for addr in "$TMPDIR_CLEAN"/nvim.*/0 /tmp/nvim.*/0; do
+        if [[ -S "$addr" ]]; then
+            nvim --server "$addr" --remote-send "<Cmd>set background=$APPEARANCE<CR><Cmd>colorscheme $NVIM_COLORSCHEME<CR>" 2>/dev/null || true
+        fi
+    done
+    echo "  nvim: updated (colorscheme: $NVIM_COLORSCHEME)"
+fi
+
+# Claude Code - set theme mode
+if command -v claude &>/dev/null; then
+    claude config set --global theme "$APPEARANCE" &>/dev/null || true
+    echo "  claude: set to $APPEARANCE"
+fi
+
+# Obsidian - update appearance.json in all vaults
+OBSIDIAN_CONFIG="$HOME/Library/Application Support/obsidian/obsidian.json"
+if [[ -f "$OBSIDIAN_CONFIG" ]]; then
+    # Get all vault paths
+    vault_paths=$(jq -r '.vaults | to_entries[] | .value.path' "$OBSIDIAN_CONFIG" 2>/dev/null)
+    obsidian_updated=0
+    while IFS= read -r vault_path; do
+        appearance_file="$vault_path/.obsidian/appearance.json"
+        if [[ -f "$appearance_file" ]]; then
+            # Update theme to match appearance (light/dark)
+            jq --arg theme "$APPEARANCE" '.theme = $theme' "$appearance_file" > "$appearance_file.tmp" && \
+                mv "$appearance_file.tmp" "$appearance_file"
+            obsidian_updated=$((obsidian_updated + 1))
+        fi
+    done <<< "$vault_paths"
+    if [[ $obsidian_updated -gt 0 ]]; then
+        echo "  obsidian: updated $obsidian_updated vault(s) to $APPEARANCE mode"
+    fi
+fi
+
+# Chrome - requires sudo, just show instructions
+if [[ -f "$OUTPUT_DIR/chrome-theme.plist" ]]; then
+    if sudo -n true 2>/dev/null; then
+        CHROME_MANAGED="/Library/Managed Preferences/com.google.Chrome.plist"
+        THEME_COLOR=$(plutil -extract BrowserThemeColor raw "$OUTPUT_DIR/chrome-theme.plist" 2>/dev/null)
         if [[ -f "$CHROME_MANAGED" ]]; then
-            # Read existing plist, update BrowserThemeColor
-            THEME_COLOR=$(plutil -extract BrowserThemeColor raw "$CHROME_THEME_PLIST" 2>/dev/null)
             sudo plutil -replace BrowserThemeColor -string "$THEME_COLOR" "$CHROME_MANAGED" 2>/dev/null || \
             sudo plutil -insert BrowserThemeColor -string "$THEME_COLOR" "$CHROME_MANAGED" 2>/dev/null
         else
-            sudo cp "$CHROME_THEME_PLIST" "$CHROME_MANAGED"
+            sudo cp "$OUTPUT_DIR/chrome-theme.plist" "$CHROME_MANAGED"
         fi
-        echo "  Chrome managed preferences updated (restart Chrome to apply)"
+        echo "  chrome: updated (restart to apply)"
     else
-        echo "  Skipping Chrome theme (requires sudo). Run manually:"
-        echo "    sudo cp '$CHROME_THEME_PLIST' '$MANAGED_PREFS_DIR/com.google.Chrome.plist'"
+        echo "  chrome: skipped (run: sudo ~/.config/themes/apply-chrome-theme.sh)"
     fi
 fi
 
-# Copy tmux theme and reload
-TMUX_THEME="$OUTPUT_DIR/tmux.conf"
-TMUX_CURRENT="$HOME/.config/tmux/theme-current.conf"
-
-if [[ -f "$TMUX_THEME" ]]; then
-    cp "$TMUX_THEME" "$TMUX_CURRENT"
-    # Reload tmux if running
-    if command -v tmux &>/dev/null && tmux list-sessions &>/dev/null; then
-        tmux source-file "$HOME/.config/tmux/tmux.conf" 2>/dev/null
-        echo "tmux theme reloaded"
-    fi
-fi
-
-# Reload Ghostty via menu (SIGUSR1 can cause issues)
-if pgrep -x ghostty &>/dev/null; then
-    osascript -e 'tell application "System Events" to tell process "Ghostty" to click menu item "Reload Configuration" of menu "Ghostty" of menu bar item "Ghostty" of menu bar 1' 2>/dev/null
-    echo "ghostty config reloaded"
-fi
-
-echo "Theme applied successfully"
+echo ""
+echo "Theme applied: $THEME_NAME ($APPEARANCE)"

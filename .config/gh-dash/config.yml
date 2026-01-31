@@ -67,7 +67,7 @@ keybindings:
       command: >
         gh pr review --repo {{.RepoName}} --approve --body "$(gum input --prompt='Approval Comment: ')" {{.PrNumber}}
 
-# Kanagawa Wave theme for gh-dash
+# Gruvbox Dark theme for gh-dash
 theme:
   ui:
     sectionsShowCount: true
@@ -75,15 +75,15 @@ theme:
       compact: false
   colors:
     text:
-      primary: "#DCD7BA"
-      secondary: "#727169"
-      inverted: "#1F1F28"
-      faint: "#727169"
-      warning: "#C0A36E"
-      success: "#76946A"
+      primary: "#ebdbb2"
+      secondary: "#928374"
+      inverted: "#1d2021"
+      faint: "#928374"
+      warning: "#d79921"
+      success: "#98971a"
     background:
-      selected: "#2D4F67"
+      selected: "#504945"
     border:
-      primary: "#54546D"
-      secondary: "#363646"
-      faint: "#2A2A37"
+      primary: "#504945"
+      secondary: "#3c3836"
+      faint: "#282828"
