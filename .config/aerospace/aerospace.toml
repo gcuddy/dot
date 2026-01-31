@@ -3,9 +3,16 @@
 # Start at login
 start-at-login = true
 
-# Launch borders for active window indicator
+# Launch borders and sketchybar
 after-startup-command = [
-    'exec-and-forget ~/.config/borders/bordersrc'
+    'exec-and-forget ~/.config/borders/bordersrc',
+    'exec-and-forget sketchybar --reload'
+]
+
+# Notify sketchybar on workspace change (directly update the label)
+exec-on-workspace-change = [
+    '/bin/bash', '-c',
+    'sketchybar --set aerospace_workspace label="$AEROSPACE_FOCUSED_WORKSPACE"'
 ]
 
 # Prevent cmd-h accidents
@@ -33,13 +40,13 @@ inherit-env-vars = true
 [exec.env-vars]
 PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 
-# Gaps
+# Gaps (outer.top accounts for sketchybar height ~28px + padding)
 [gaps]
 inner.horizontal = 10
 inner.vertical = 10
 outer.left = 10
 outer.bottom = 10
-outer.top = 10
+outer.top = 38
 outer.right = 10
 
 # Main keybindings
