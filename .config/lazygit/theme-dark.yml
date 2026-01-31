@@ -1,27 +1,27 @@
-# Tokyo Night theme for lazygit
+# Gruvbox Dark theme for lazygit
 gui:
   theme:
     activeBorderColor:
-      - "#7aa2f7"
+      - "#83a598"
       - bold
     inactiveViewSelectedLineBgColor:
-      - "#364A82"
+      - "#504945"
     inactiveBorderColor:
-      - "#565f89"
+      - "#928374"
     optionsTextColor:
-      - "#7aa2f7"
+      - "#83a598"
     selectedLineBgColor:
-      - "#364A82"
+      - "#504945"
     selectedRangeBgColor:
-      - "#364A82"
+      - "#504945"
     cherryPickedCommitBgColor:
-      - "#3d59a1"
+      - "#fabd2f"
     cherryPickedCommitFgColor:
-      - "#c0caf5"
+      - "#ebdbb2"
     unstagedChangesColor:
-      - "#f7768e"
+      - "#cc241d"
     defaultFgColor:
-      - "#c0caf5"
+      - "#ebdbb2"
 git:
   paging:
     colorArg: always

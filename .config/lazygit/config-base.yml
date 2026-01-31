@@ -1,7 +1,6 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 notARepository: "skip" # one of: 'prompt' | 'create' | 'skip'
 promptToReturnFromSubprocess: false
-# Gruvbox Dark theme for lazygit
 gui:
   nerdFontsVersion: "3"
   showIcons: true
@@ -35,28 +34,6 @@ gui:
   statusPanelView: allBranchesLog
   commandLogSize: 2
   showRandomTip: false
-  theme:
-    activeBorderColor:
-      - "#83a598"
-      - bold
-    inactiveViewSelectedLineBgColor:
-      - "#504945"
-    inactiveBorderColor:
-      - "#928374"
-    optionsTextColor:
-      - "#83a598"
-    selectedLineBgColor:
-      - "#504945"
-    selectedRangeBgColor:
-      - "#504945"
-    cherryPickedCommitBgColor:
-      - "#fabd2f"
-    cherryPickedCommitFgColor:
-      - "#ebdbb2"
-    unstagedChangesColor:
-      - "#cc241d"
-    defaultFgColor:
-      - "#ebdbb2"
 os:
   editPreset: "nvim"
   # editCommand: "$XDG_CONFIG_HOME/lazygit/edit-nvim"
@@ -75,9 +52,6 @@ git:
   branchPrefix: "gus/"
   allBranchesLogCmds:
     - git log --color=always --graph --all --date=relative --pretty=format:'%C(auto)%h %C(reset)%<|(50,trunc)%s %C(bold blue)<%an>%C(reset) %C(green)(%cd)%C(reset)%C(auto)%d'
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never
 customCommands:
   # - key: "J"
   #   command: $XDG_CONFIG_HOME/lazygit/create-jira-branch {{index .PromptResponses 0 | quote}}
@@ -126,9 +100,9 @@ customCommands:
     context: "files"
     loadingText: "opening gum commit tool"
     output: terminal
-# - key: "P"
-#   command: 'git push && gh pr checks --watch --json name,state -q ".[] | select(.name == "Mark as draft") | .state == "SUCCESS" or .state == "SKIPPED""'
-# context: "localBranches"
-# - key: "F"
-#   command: "git push --force-with-lease --no-verify"
-#   context: "localBranches"
+  # - key: "P"
+  #   command: 'git push && gh pr checks --watch --json name,state -q ".[] | select(.name == "Mark as draft") | .state == "SUCCESS" or .state == "SKIPPED""'
+  # context: "localBranches"
+  # - key: "F"
+  #   command: "git push --force-with-lease --no-verify"
+  #   context: "localBranches"

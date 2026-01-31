@@ -94,10 +94,17 @@ if [[ -f "$OUTPUT_DIR/tmux.conf" ]]; then
     echo "  tmux: updated"
 fi
 
-# lazygit - copy theme
-if [[ -f "$OUTPUT_DIR/lazygit.yml" ]]; then
+# lazygit - merge with base config
+if [[ -f "$OUTPUT_DIR/lazygit.yml" && -f "$HOME/.config/lazygit/config-base.yml" ]]; then
     cp "$OUTPUT_DIR/lazygit.yml" "$HOME/.config/lazygit/theme-current.yml"
-    echo "  lazygit: updated (restart to apply)"
+    if command -v yq &>/dev/null; then
+        yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
+            "$HOME/.config/lazygit/config-base.yml" "$OUTPUT_DIR/lazygit.yml" \
+            > "$HOME/.config/lazygit/config.yml"
+        echo "  lazygit: updated (restart to apply)"
+    else
+        echo "  lazygit: skipped (yq not found)"
+    fi
 fi
 
 # gh-dash - merge with base config
