@@ -24,18 +24,30 @@ function config
             end
         end
     else if test "$argv[1]" = "untracked"
-        # Show top-level untracked items in .config (must run from $HOME)
-        set -l tracked
+        # Show untracked items in .config
+        # Top-level: untracked folders/files
+        # Within tracked folders: untracked files (via git ls-files --others)
+        set -l tracked_dirs
         for file in (cd $HOME && /usr/bin/git --git-dir=$HOME/.dot --work-tree=$HOME ls-files .config/)
             set -l dir (string replace '.config/' '' $file | string split '/' -f1)
-            if not contains $dir $tracked
-                set -a tracked $dir
+            if not contains $dir $tracked_dirs
+                set -a tracked_dirs $dir
             end
         end
+        
+        # Show untracked top-level items
+        echo "# Untracked top-level:"
         for item in (command ls -1 $HOME/.config)
-            if not contains $item $tracked
+            if not contains $item $tracked_dirs
                 echo $item
             end
+        end
+        
+        # Show untracked files within tracked directories
+        echo ""
+        echo "# Untracked files in tracked folders:"
+        for dir in $tracked_dirs
+            cd $HOME && /usr/bin/git --git-dir=$HOME/.dot --work-tree=$HOME ls-files --others --exclude-standard .config/$dir/ 2>/dev/null
         end
     else
         command git --git-dir=$HOME/.dot --work-tree=$HOME $argv
