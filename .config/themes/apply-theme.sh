@@ -68,7 +68,10 @@ if [[ -f "$OUTPUT_DIR/bordersrc" ]]; then
     cp "$OUTPUT_DIR/bordersrc" "$HOME/.config/borders/bordersrc"
     chmod +x "$HOME/.config/borders/bordersrc"
     if pgrep -x borders &>/dev/null; then
-        brew services restart borders 2>/dev/null || (pkill -x borders; "$HOME/.config/borders/bordersrc" &)
+        pkill -x borders
+        sleep 0.2
+        nohup "$HOME/.config/borders/bordersrc" &>/dev/null &
+        disown
     fi
     echo "  borders: updated"
 fi
