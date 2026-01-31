@@ -2,15 +2,21 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 
-# CPU percentage
-CPU=$(top -l 2 -n 0 | tail -1 | awk '{print int($3 + $7)}')
+# Get CPU usage (faster method using ps)
+CORE_COUNT=$(sysctl -n machdep.cpu.thread_count)
+CPU_INFO=$(ps -eo pcpu)
+CPU_TOTAL=$(echo "$CPU_INFO" | awk "{sum+=\$1} END {printf \"%.0f\", sum/$CORE_COUNT}")
 
-if [[ "$CPU" -ge 80 ]]; then
+# Color based on usage
+if [[ "$CPU_TOTAL" -ge 80 ]]; then
     COLOR=$RED
-elif [[ "$CPU" -ge 50 ]]; then
+elif [[ "$CPU_TOTAL" -ge 50 ]]; then
     COLOR=$YELLOW
 else
     COLOR=$FOREGROUND_DIM
 fi
 
-sketchybar --set "$NAME" icon.color="$COLOR"
+sketchybar --set "$NAME" \
+    icon.color="$COLOR" \
+    label="${CPU_TOTAL}%" \
+    label.drawing=on

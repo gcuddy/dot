@@ -106,17 +106,18 @@ sketchybar --add item media center \
 
 ##### Right Items #####
 
-# CPU (like Omarchy's cpu)
+# CPU with percentage
 sketchybar --add item cpu right \
     --set cpu \
         icon="󰍛" \
         icon.color=$FOREGROUND_DIM \
-        label.drawing=off \
+        label.font="JetBrainsMono Nerd Font:Regular:11.0" \
+        label.color=$FOREGROUND_DIM \
         update_freq=5 \
         script="$PLUGIN_DIR/cpu.sh" \
         click_script="open -a 'Activity Monitor'"
 
-# Battery (like Omarchy's battery)
+# Battery
 sketchybar --add item battery right \
     --set battery \
         icon.font="JetBrainsMono Nerd Font:Bold:14.0" \
@@ -142,7 +143,7 @@ sketchybar --add item wifi right \
         script="$PLUGIN_DIR/wifi.sh" \
         click_script="open 'x-apple.systempreferences:com.apple.preference.network'"
 
-# Bluetooth (like Omarchy's bluetooth)
+# Bluetooth
 sketchybar --add item bluetooth right \
     --set bluetooth \
         icon.font="JetBrainsMono Nerd Font:Bold:14.0" \
@@ -150,6 +151,19 @@ sketchybar --add item bluetooth right \
         update_freq=10 \
         script="$PLUGIN_DIR/bluetooth.sh" \
         click_script="open 'x-apple.systempreferences:com.apple.BluetoothSettings'"
+
+# Calendar - next event
+sketchybar --add item calendar right \
+    --set calendar \
+        icon="" \
+        icon.font="JetBrainsMono Nerd Font:Bold:14.0" \
+        icon.color=$FOREGROUND_DIM \
+        label.font="JetBrainsMono Nerd Font:Regular:11.0" \
+        label.color=$FOREGROUND \
+        label.max_chars=35 \
+        update_freq=60 \
+        script="$PLUGIN_DIR/calendar.sh" \
+        click_script="open -a Calendar"
 
 ##### Events #####
 # Register aerospace workspace change event
